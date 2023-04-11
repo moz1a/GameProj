@@ -9,16 +9,17 @@ namespace GameProj
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        public List<Creature> Creatures = new List<Creature>();
-        
-        
-        Vector2 ballPosition;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        //public List<Creature> Creatures = new List<Creature>();
+
+        public Texture2D hero;
+        public Texture2D backgroundField;
+        Vector2 frogPosition;
         float ballSpeed;
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -27,11 +28,13 @@ namespace GameProj
         {
             // TODO: Add your initialization logic here
 
-            var crocoFrog = new Creature();
-            Creatures.Add(crocoFrog);
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
 
-            ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
-                                       _graphics.PreferredBackBufferHeight / 2);
+            frogPosition = new Vector2(graphics.PreferredBackBufferWidth / 2,
+                                       graphics.PreferredBackBufferHeight / 2);
             ballSpeed = 200f;
 
             base.Initialize();
@@ -39,10 +42,11 @@ namespace GameProj
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Creatures[0] = Content.Load<Texture2D>("crocoFrog");
-            //ballTexture = Content.Load<Texture2D>("ball");
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            backgroundField = Content.Load<Texture2D>("background");
+            hero = Content.Load<Texture2D>("crocofrog");
+            Menu.Background = Content.Load<Texture2D>("Menu");
+            Menu.Font = Content.Load<SpriteFont>("Font");
 
 
             // TODO: use this.Content to load your game content here
@@ -57,26 +61,25 @@ namespace GameProj
 
             if (kstate.IsKeyDown(Keys.Up))
             {
-                ballPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                frogPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Down))
             {
-                ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                frogPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Left))
             {
-                ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                frogPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if (kstate.IsKeyDown(Keys.Right))
             {
-                ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                frogPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            base.Update(gameTime);
-
+            Menu.Update();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -84,24 +87,29 @@ namespace GameProj
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(ballTexture, ballPosition, Color.White);
-            _spriteBatch.End();
+            spriteBatch.Begin();
+            //_spriteBatch.Draw(backgroundField,new Rectangle(0, 0, 1920, 1080), Color.White);
+            Menu.Draw(spriteBatch);
+            //spriteBatch.Draw(hero, frogPosition, Color.White);
+            spriteBatch.End();
 
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
+
+
         public Creature MakeCreature(Creatures creature)
         {
             var result = new Creature();
 
             if (creature == GameProj.Creatures.crocoFrog)
             {
-                resul
+                return result;
             }
+            return null;
 
         }
     }
@@ -118,9 +126,9 @@ namespace GameProj
 
     public class Creature
     {
-         readonly Texture Texture;
-         readonly LifeCharacteristics LifeParams;
-         readonly Position Position;
+         public Texture Texture;
+         public LifeCharacteristics LifeParams;
+         public Position Position;
 
     }
 
