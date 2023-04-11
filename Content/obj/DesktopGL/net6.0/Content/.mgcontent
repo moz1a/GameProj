@@ -5,16 +5,16 @@
   <Config />
   <SourceFiles>
     <File>D:/Game_1/GameProj/Content/background.png</File>
+    <File>C:/Users/maxsg/OneDrive/Рабочий стол/knight.png</File>
     <File>D:/Game_1/GameProj/Content/crocofrog.jpg</File>
     <File>D:/Game_1/GameProj/Content/File.spritefont</File>
-    <File>D:/Game_1/GameProj/Content/hero.png</File>
     <File>D:/Game_1/GameProj/Content/Menu.jpg</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
+    <File>knight.png</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

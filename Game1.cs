@@ -12,11 +12,8 @@ namespace GameProj
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         //public List<Creature> Creatures = new List<Creature>();
+        State state = State.Menu;
 
-        public Texture2D hero;
-        public Texture2D backgroundField;
-        Vector2 frogPosition;
-        float ballSpeed;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -26,16 +23,10 @@ namespace GameProj
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
-
-            frogPosition = new Vector2(graphics.PreferredBackBufferWidth / 2,
-                                       graphics.PreferredBackBufferHeight / 2);
-            ballSpeed = 200f;
 
             base.Initialize();
         }
@@ -43,60 +34,57 @@ namespace GameProj
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            backgroundField = Content.Load<Texture2D>("background");
-            hero = Content.Load<Texture2D>("crocofrog");
+            GameAction.BackgroundField = Content.Load<Texture2D>("background");
+            Hero.texture = Content.Load<Texture2D>("knight");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
-
-
-            // TODO: use this.Content to load your game content here
+            GameAction.Initialise(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            var key = Keyboard.GetState();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || key.IsKeyDown(Keys.Escape))
                 Exit();
 
-            var kstate = Keyboard.GetState();
-
-            if (kstate.IsKeyDown(Keys.Up))
+            switch (state)
             {
-                frogPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                case State.Menu:
+                    Menu.Update();
+                    if (key.IsKeyDown(Keys.Space)) 
+                        state = State.Action;
+                    break;
+                case State.Action:
+                    GameAction.Update();
+                    if (key.IsKeyDown(Keys.W)) GameAction.Hero.Up();
+                    if (key.IsKeyDown(Keys.S)) GameAction.Hero.Down();
+                    if (key.IsKeyDown(Keys.D)) GameAction.Hero.Right();
+                    if (key.IsKeyDown(Keys.A)) GameAction.Hero.Left();
+                    if (key.IsKeyDown(Keys.Space))
+                        state = State.Menu;
+                    break;
             }
-
-            if (kstate.IsKeyDown(Keys.Down))
-            {
-                frogPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if (kstate.IsKeyDown(Keys.Left))
-            {
-                frogPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if (kstate.IsKeyDown(Keys.Right))
-            {
-                frogPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            Menu.Update();
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            //_spriteBatch.Draw(backgroundField,new Rectangle(0, 0, 1920, 1080), Color.White);
-            Menu.Draw(spriteBatch);
-            //spriteBatch.Draw(hero, frogPosition, Color.White);
+            switch (state)
+            {
+                case State.Menu:
+                    Menu.Draw(spriteBatch);
+                    break;
+                case State.Action:
+                    GameAction.Draw();
+                    break;
+
+            }
             spriteBatch.End();
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
 
@@ -114,21 +102,16 @@ namespace GameProj
         }
     }
 
-    public class Texture
+    enum State
     {
-        public Texture2D texture;
-    }
-
-    public class Position
-    {
-        Vector2 position;
+        Action, 
+        Menu
     }
 
     public class Creature
     {
          public Texture Texture;
          public LifeCharacteristics LifeParams;
-         public Position Position;
 
     }
 
