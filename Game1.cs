@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 
 namespace GameProj
 {
@@ -8,8 +11,9 @@ namespace GameProj
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
-        Texture2D ballTexture;
+        public List<Creature> Creatures = new List<Creature>();
+        
+        
         Vector2 ballPosition;
         float ballSpeed;
         public Game1()
@@ -22,6 +26,10 @@ namespace GameProj
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            var crocoFrog = new Creature();
+            Creatures.Add(crocoFrog);
+
             ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
                                        _graphics.PreferredBackBufferHeight / 2);
             ballSpeed = 200f;
@@ -33,7 +41,8 @@ namespace GameProj
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ballTexture = Content.Load<Texture2D>("ball");
+            Creatures[0] = Content.Load<Texture2D>("crocoFrog");
+            //ballTexture = Content.Load<Texture2D>("ball");
 
 
             // TODO: use this.Content to load your game content here
@@ -85,5 +94,48 @@ namespace GameProj
 
             base.Draw(gameTime);
         }
+        public Creature MakeCreature(Creatures creature)
+        {
+            var result = new Creature();
+
+            if (creature == GameProj.Creatures.crocoFrog)
+            {
+                resul
+            }
+
+        }
+    }
+
+    public class Texture
+    {
+        public Texture2D texture;
+    }
+
+    public class Position
+    {
+        Vector2 position;
+    }
+
+    public class Creature
+    {
+         readonly Texture Texture;
+         readonly LifeCharacteristics LifeParams;
+         readonly Position Position;
+
+    }
+
+    public class LifeCharacteristics
+    {
+        public int HP;
+        public double Speed;
+        public double Strength;
+        public double Range;
+        public double FireRate;
+        public double BallSpeed;
+    }
+
+    public enum Creatures
+    {
+        crocoFrog
     }
 }
