@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Reflection.PortableExecutable;
+using System.Threading;
 
 namespace GameProj
 {
@@ -12,7 +13,7 @@ namespace GameProj
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         //public List<Creature> Creatures = new List<Creature>();
-        State state = State.Menu;
+        State state { get; set; } = State.Menu;
 
         public Game1()
         {
@@ -25,7 +26,7 @@ namespace GameProj
         {
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -34,7 +35,7 @@ namespace GameProj
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            GameAction.BackgroundField = Content.Load<Texture2D>("background");
+            GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
             Hero.texture = Content.Load<Texture2D>("knight");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
@@ -51,8 +52,7 @@ namespace GameProj
             {
                 case State.Menu:
                     Menu.Update();
-                    if (key.IsKeyDown(Keys.Space)) 
-                        state = State.Action;
+                    if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
                     break;
                 case State.Action:
                     GameAction.Update();
@@ -60,12 +60,26 @@ namespace GameProj
                     if (key.IsKeyDown(Keys.S)) GameAction.Hero.Down();
                     if (key.IsKeyDown(Keys.D)) GameAction.Hero.Right();
                     if (key.IsKeyDown(Keys.A)) GameAction.Hero.Left();
-                    if (key.IsKeyDown(Keys.Space))
-                        state = State.Menu;
+                    if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
                     break;
             }
 
             base.Update(gameTime);
+        }
+
+        private static State  ChangeState(State state)
+        {
+            Thread.Sleep(100);
+            switch (state)
+            {
+                case State.Menu:
+                    state = State.Action;
+                    return state;
+                case State.Action:
+                    state = State.Menu;
+                    return state;
+            }
+            return state;
         }
 
         protected override void Draw(GameTime gameTime)

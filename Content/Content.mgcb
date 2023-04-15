@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin background.png
+#begin background_1.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,9 +23,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:background.png
+/build:background_1.jpg
 
-#begin C:/Users/maxsg/OneDrive/Рабочий стол/knight.png
+#begin C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/knight.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +35,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:C:/Users/maxsg/OneDrive/Рабочий стол/knight.png;knight.png
+/build:C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/knight.png;knight.png
 
 #begin crocofrog.jpg
 /importer:TextureImporter

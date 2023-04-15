@@ -19,7 +19,7 @@ namespace GameProj
             SpriteBatch = spriteBatch;
             Width = width;
             Height = height;
-            Hero = new Hero(new Vector2(0, 0));
+            Hero = new Hero(new Vector2(40, 40));
         }
 
         public static void Update()
@@ -33,14 +33,21 @@ namespace GameProj
         }
     }
 
-
+    enum Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
 
     class Hero
     {
         public static Texture2D texture { get; set; }
         Vector2 position;
         Color color = Color.White;
-        int Speed = 5;
+        int speed = 15;
+        Direction direction { get; set; } = Direction.Right;
         
         public Hero(Vector2 position)
         {
@@ -49,19 +56,33 @@ namespace GameProj
 
         public void Up() 
         {
-            this.position.Y -= Speed;
+            if(IsInBordersOfMap(position, speed, Direction.Up, texture))
+                this.position.Y -= speed;
         }
         public void Down()
         {
-            this.position.Y += Speed;
+            if(IsInBordersOfMap(position, speed, Direction.Down, texture))
+                this.position.Y += speed;
         }
         public void Right()
         {
-            this.position.X += Speed;
+            if(IsInBordersOfMap(position, speed, Direction.Right, texture))
+                this.position.X += speed;
+
         }
         public void Left()
         {
-            this.position.X -= Speed;
+            if(IsInBordersOfMap(position, speed, Direction.Left, texture))
+                this.position.X -= speed;
+        }
+
+        public static bool IsInBordersOfMap(Vector2 position, int speed, Direction direction, Texture2D texture)
+        {
+            if (direction == Direction.Left && position.X >= -75) return true;
+            else if (direction == Direction.Right && position.X <= GameAction.Width - texture.Width + 40) return true;
+            else if (direction == Direction.Up && position.Y >= 0) return true;
+            else if (direction == Direction.Down && position.Y <= GameAction.Height - texture.Height - 20 ) return true;
+            else return false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
