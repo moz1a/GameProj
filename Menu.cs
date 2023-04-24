@@ -11,8 +11,8 @@ namespace GameProj
         public static SpriteFont Font { get; set; }
         private static int timeCounter = 0;
         private static Color color;
-        private static Rectangle texturePosition = new Rectangle(0, 0, 1920, 1120);
-        private static Vector2 textPosition = new Vector2(1920/16, 50);
+        private static Rectangle texturePosition = new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight);
+        private static Vector2 textPosition = new Vector2(Game1.ScreenWidth/16, 50);
 
         public static void Update()
         {

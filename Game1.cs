@@ -12,23 +12,26 @@ namespace GameProj
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        public static int ScreenHeight;
+        public static int ScreenWidth;
         //public List<Creature> Creatures = new List<Creature>();
         State state { get; set; } = State.Menu;
+
+        private Sprite monster;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            ScreenHeight = graphics.PreferredBackBufferHeight;
+            ScreenWidth = graphics.PreferredBackBufferWidth;
         }
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-
             base.Initialize();
         }
 
@@ -40,12 +43,16 @@ namespace GameProj
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
             GameAction.Initialise(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            var monsterTexture = Content.Load<Texture2D>("Monster");
+            monster = new Sprite(monsterTexture) { Input = new Input { Down = Keys.S, Left = Keys.A, Right = Keys.D, Up = Keys.W } };
+            monster.Position = new Vector2(100, 100);
+            
         }
 
         protected override void Update(GameTime gameTime)
         {
             var key = Keyboard.GetState();
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || key.IsKeyDown(Keys.Escape))
+            if (key.IsKeyDown(Keys.Escape))
                 Exit();
 
             switch (state)
@@ -61,6 +68,7 @@ namespace GameProj
                     if (key.IsKeyDown(Keys.D)) GameAction.Hero.Right();
                     if (key.IsKeyDown(Keys.A)) GameAction.Hero.Left();
                     if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
+                    monster.Update();
                     break;
             }
 
@@ -95,6 +103,7 @@ namespace GameProj
                     break;
                 case State.Action:
                     GameAction.Draw();
+                    monster.Draw(spriteBatch);
                     break;
 
             }

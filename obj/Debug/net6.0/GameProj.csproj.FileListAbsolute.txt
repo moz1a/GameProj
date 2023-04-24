@@ -30,3 +30,4 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\Menu.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Font.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\knight.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\background_1.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\Monster.xnb
