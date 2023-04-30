@@ -9,7 +9,7 @@ namespace GameProj
     {
         private Texture2D texture;
         public Vector2 Position;
-        public float Speed = 5f;
+        public float Speed;
         public Input Input;
         public Rectangle Rectangle
         {
@@ -24,43 +24,14 @@ namespace GameProj
             this.texture = texture;
         }
 
-        public void Update()
+        public virtual void Update()
         {
-            Move();
+
         }
 
-        private void Move()
-        {
-            if (Input==null) return;
-
-            if(Keyboard.GetState().IsKeyDown(Input.Left))
-            {
-                Position.X -= Speed;
-            }
-            if (Keyboard.GetState().IsKeyDown(Input.Right))
-            {
-                Position.X += Speed;
-            }
-            if (Keyboard.GetState().IsKeyDown(Input.Up))
-            {
-                Position.Y -= Speed;
-            }
-            if (Keyboard.GetState().IsKeyDown(Input.Down))
-            {
-                Position.Y += Speed;
-            }
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, Color.White);
         }
-    }
-    enum Direction
-    {
-        Up,
-        Down,
-        Left,
-        Right
     }
 }

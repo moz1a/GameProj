@@ -16,7 +16,7 @@ namespace GameProj
             Position = new Vector2(100, 100);
         }
 
-       // public static 
+       
 
 
 

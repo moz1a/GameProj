@@ -6,15 +6,17 @@ namespace GameProj
 {
     class Hero : Sprite
     {
-        Vector2 position;
-        Color color = Color.White;
-        int speed = 15;
 
         public Hero(Texture2D texture) : base(texture)
         {
         }
 
         public override void Update()
+        {
+            Move();
+        }
+
+        private void Move()
         {
             if (Keyboard.GetState().IsKeyDown(Input.Left))
             {
@@ -34,11 +36,6 @@ namespace GameProj
             }
 
             Position = Vector2.Clamp(Position, new Vector2(0, 0), new Vector2(Game1.ScreenWidth - this.Rectangle.Width, Game1.ScreenHeight - this.Rectangle.Height));
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, position, color);
         }
     }
 }

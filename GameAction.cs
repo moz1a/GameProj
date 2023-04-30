@@ -13,23 +13,28 @@ namespace GameProj
         public static int Width, Height;
         public static Random rnd = new Random();
         static public Hero Hero { get; set; }
+        public Monster Monster { get; set; }
+        public static Texture2D heroSprite { get; set; }
 
         public static void Initialise(SpriteBatch spriteBatch, int width, int height)
         {
             SpriteBatch = spriteBatch;
             Width = width;
             Height = height;
-            Hero = new Hero(new Vector2(40, 40));
+            //Hero = new Hero(heroSprite);
+
         }
 
         public static void Update()
         {
+            Hero.Update();
         }
 
         public static void Draw()
         {
             SpriteBatch.Draw(BackgroundField, new Rectangle(0, 0, 1920, 1080), Color.White);
-            Hero.Draw(SpriteBatch);
+            //Hero.Draw(SpriteBatch);
+
         }
     }
 

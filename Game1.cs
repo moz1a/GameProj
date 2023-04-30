@@ -16,8 +16,7 @@ namespace GameProj
         public static int ScreenWidth;
         //public List<Creature> Creatures = new List<Creature>();
         State state { get; set; } = State.Menu;
-
-        private Sprite monster;
+        private List<Sprite> sprites;
 
         public Game1()
         {
@@ -39,14 +38,27 @@ namespace GameProj
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
-            Hero.texture = Content.Load<Texture2D>("knight");
+            var heroTexture = Content.Load<Texture2D>("knight");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
             GameAction.Initialise(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             var monsterTexture = Content.Load<Texture2D>("Monster");
-            monster = new Sprite(monsterTexture) { Input = new Input { Down = Keys.S, Left = Keys.A, Right = Keys.D, Up = Keys.W } };
-            monster.Position = new Vector2(100, 100);
-            
+
+            sprites = new List<Sprite>()
+            {
+                new Hero(heroTexture)
+                {
+                    Input = new Input()
+                    {
+                        Up = Keys.W,
+                        Down = Keys.S,
+                        Right = Keys.D,
+                        Left = Keys.A
+                    },
+                    Position = new Vector2(100, 100 ),
+                    Speed = 5f,
+                }
+            };
         }
 
         protected override void Update(GameTime gameTime)
@@ -62,13 +74,11 @@ namespace GameProj
                     if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
                     break;
                 case State.Action:
-                    GameAction.Update();
-                    if (key.IsKeyDown(Keys.W)) GameAction.Hero.Up();
-                    if (key.IsKeyDown(Keys.S)) GameAction.Hero.Down();
-                    if (key.IsKeyDown(Keys.D)) GameAction.Hero.Right();
-                    if (key.IsKeyDown(Keys.A)) GameAction.Hero.Left();
+                    //GameAction.Update();
+                    foreach (var sprite in sprites)
+                        sprite.Update();
+                    
                     if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
-                    monster.Update();
                     break;
             }
 
@@ -103,25 +113,13 @@ namespace GameProj
                     break;
                 case State.Action:
                     GameAction.Draw();
-                    monster.Draw(spriteBatch);
+                    foreach (var sprite in sprites)
+                        sprite.Draw(spriteBatch);
                     break;
 
             }
             spriteBatch.End();
             base.Draw(gameTime);
-        }
-
-
-        public Creature MakeCreature(Creatures creature)
-        {
-            var result = new Creature();
-
-            if (creature == GameProj.Creatures.crocoFrog)
-            {
-                return result;
-            }
-            return null;
-
         }
     }
 
@@ -129,13 +127,6 @@ namespace GameProj
     {
         Action, 
         Menu
-    }
-
-    public class Creature
-    {
-         public Texture Texture;
-         public LifeCharacteristics LifeParams;
-
     }
 
     public class LifeCharacteristics
@@ -146,10 +137,5 @@ namespace GameProj
         public double Range;
         public double FireRate;
         public double BallSpeed;
-    }
-
-    public enum Creatures
-    {
-        crocoFrog
     }
 }
