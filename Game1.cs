@@ -14,9 +14,8 @@ namespace GameProj
         private SpriteBatch spriteBatch;
         public static int ScreenHeight;
         public static int ScreenWidth;
-        //public List<Creature> Creatures = new List<Creature>();
         State state { get; set; } = State.Menu;
-        private List<Sprite> sprites;
+        
 
         public Game1()
         {
@@ -38,27 +37,13 @@ namespace GameProj
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
-            var heroTexture = Content.Load<Texture2D>("knight");
+            GameAction.heroSprite = Content.Load<Texture2D>("knight");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
             GameAction.Initialise(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
             var monsterTexture = Content.Load<Texture2D>("Monster");
 
-            sprites = new List<Sprite>()
-            {
-                new Hero(heroTexture)
-                {
-                    Input = new Input()
-                    {
-                        Up = Keys.W,
-                        Down = Keys.S,
-                        Right = Keys.D,
-                        Left = Keys.A
-                    },
-                    Position = new Vector2(100, 100 ),
-                    Speed = 5f,
-                }
-            };
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -74,9 +59,7 @@ namespace GameProj
                     if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
                     break;
                 case State.Action:
-                    //GameAction.Update();
-                    foreach (var sprite in sprites)
-                        sprite.Update();
+                    GameAction.Update();
                     
                     if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
                     break;
@@ -112,11 +95,8 @@ namespace GameProj
                     Menu.Draw(spriteBatch);
                     break;
                 case State.Action:
-                    GameAction.Draw();
-                    foreach (var sprite in sprites)
-                        sprite.Draw(spriteBatch);
+                    GameAction.Draw(spriteBatch);             
                     break;
-
             }
             spriteBatch.End();
             base.Draw(gameTime);
@@ -129,13 +109,5 @@ namespace GameProj
         Menu
     }
 
-    public class LifeCharacteristics
-    {
-        public int HP;
-        public double Speed;
-        public double Strength;
-        public double Range;
-        public double FireRate;
-        public double BallSpeed;
-    }
+
 }

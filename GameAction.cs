@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace GameProj
@@ -11,32 +12,58 @@ namespace GameProj
         public static Texture2D BackgroundField { get; set; }
         static public SpriteBatch SpriteBatch { get; set; }
         public static int Width, Height;
+
         public static Random rnd = new Random();
-        static public Hero Hero { get; set; }
-        public Monster Monster { get; set; }
         public static Texture2D heroSprite { get; set; }
+
+        static List<Sprite> sprites;
+
 
         public static void Initialise(SpriteBatch spriteBatch, int width, int height)
         {
             SpriteBatch = spriteBatch;
             Width = width;
             Height = height;
-            //Hero = new Hero(heroSprite);
-
+            sprites = new List<Sprite>()
+            {
+                new Hero(heroSprite)
+                {
+                    Input = new Input()
+                    {
+                        Up = Keys.W,
+                        Down = Keys.S,
+                        Right = Keys.D,
+                        Left = Keys.A
+                    },
+                    Position = new Vector2(100, 100 ),
+                    Speed = 5f,
+                }
+            };
         }
 
         public static void Update()
         {
-            Hero.Update();
+            foreach (var sprite in sprites)
+            {
+                sprite.Update();
+            }
         }
 
-        public static void Draw()
+        public static void Draw(SpriteBatch spriteBatch)
         {
             SpriteBatch.Draw(BackgroundField, new Rectangle(0, 0, 1920, 1080), Color.White);
-            //Hero.Draw(SpriteBatch);
-
+            foreach (var sprite in sprites)
+                sprite.Draw(spriteBatch);
         }
     }
 
-    
- }
+    public class LifeCharacteristics
+    {
+        public int HP;
+        public double Speed;
+        public double Strength;
+        public double Range;
+        public double FireRate;
+        public double BallSpeed;
+    }
+}
