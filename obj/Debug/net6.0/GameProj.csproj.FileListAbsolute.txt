@@ -24,7 +24,6 @@ D:\Game_1\GameProj\obj\Debug\net6.0\GameProj.pdb
 D:\Game_1\GameProj\obj\Debug\net6.0\GameProj.genruntimeconfig.cache
 D:\Game_1\GameProj\obj\Debug\net6.0\ref\GameProj.dll
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\ball.xnb
-D:\Game_1\GameProj\bin\Debug\net6.0\Content\crocofrog.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Background.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Menu.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Font.xnb

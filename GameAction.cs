@@ -15,6 +15,7 @@ namespace GameProj
 
         public static Random rnd = new Random();
         public static Texture2D heroSprite { get; set; }
+        public static Texture2D monsterSprite { get; set; }
 
         static List<Sprite> sprites;
 
@@ -35,17 +36,30 @@ namespace GameProj
                         Right = Keys.D,
                         Left = Keys.A
                     },
-                    Position = new Vector2(100, 100 ),
+                    Position = new Vector2(100, 100),
+                    Speed = 5f,
+                },
+
+                new Hero(monsterSprite)
+                {
+                    Input = new Input()
+                    {
+                        Up = Keys.Up,
+                        Down = Keys.Down,
+                        Right = Keys.Right,
+                        Left = Keys.Left
+                    },
+                    Position = new Vector2(300, 100),
                     Speed = 5f,
                 }
             };
         }
 
-        public static void Update()
+        public static void Update(GameTime gameTime)
         {
             foreach (var sprite in sprites)
             {
-                sprite.Update();
+                sprite.Update(gameTime, sprites);
             }
         }
 

@@ -38,12 +38,13 @@ namespace GameProj
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
             GameAction.heroSprite = Content.Load<Texture2D>("knight");
+            GameAction.monsterSprite = Content.Load<Texture2D>("Monster");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
             GameAction.Initialise(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-            var monsterTexture = Content.Load<Texture2D>("Monster");
-
             
+
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -59,7 +60,7 @@ namespace GameProj
                     if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
                     break;
                 case State.Action:
-                    GameAction.Update();
+                    GameAction.Update(gameTime);
                     
                     if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
                     break;

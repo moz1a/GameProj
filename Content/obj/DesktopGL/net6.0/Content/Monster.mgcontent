@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/maxsg/OneDrive/Рабочий стол/Monster.png</SourceFile>
-  <SourceTime>2023-04-24T22:57:37.1474538+05:00</SourceTime>
+  <SourceFile>D:/Game_1/GameProj/Content/Monster.png</SourceFile>
+  <SourceTime>2023-05-01T14:14:20.0002014+05:00</SourceTime>
   <DestFile>D:/Game_1/GameProj/Content/bin/DesktopGL/Content/Monster.xnb</DestFile>
-  <DestTime>2023-04-24T22:58:25.089203+05:00</DestTime>
+  <DestTime>2023-05-01T14:14:42.2584716+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

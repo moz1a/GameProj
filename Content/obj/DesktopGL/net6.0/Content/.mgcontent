@@ -6,17 +6,15 @@
   <SourceFiles>
     <File>D:/Game_1/GameProj/Content/1_knight.png</File>
     <File>D:/Game_1/GameProj/Content/background_1.jpg</File>
-    <File>C:/Users/maxsg/OneDrive/Рабочий стол/Monster.png</File>
-    <File>D:/Game_1/GameProj/Content/crocofrog.jpg</File>
     <File>D:/Game_1/GameProj/Content/File.spritefont</File>
     <File>D:/Game_1/GameProj/Content/Menu.jpg</File>
+    <File>D:/Game_1/GameProj/Content/Monster.png</File>
   </SourceFiles>
   <DestFiles>
     <File>knight.png</File>
     <File xsi:nil="true" />
-    <File>Monster.png</File>
-    <File xsi:nil="true" />
     <File>Font.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
