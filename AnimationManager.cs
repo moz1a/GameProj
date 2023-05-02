@@ -11,51 +11,59 @@ namespace GameProj
 {
     public class AnimationManager
     {
-        private Animation animation;
+        public Animation Animation { get; set; }
         private float timer;
         public Vector2 Position { get; set; }
+        private Vector2 previousPosition;
 
         public AnimationManager(Animation animation)
         {
-            this.animation = animation;
+            this.Animation = animation;
         }
 
         public void Play(Animation animation)
         {
-            if (this.animation == animation) return;
-
-            this.animation = animation;
+            if (this.Animation == animation) return;
+            
+            Animation = animation;
+            
             Stop();
         }
 
         public void Stop()
         {
             timer = 0f;
-            animation.CurrentFrame = 0;
+            Animation.CurrentFrame = 0;
         }
 
         public void Update(GameTime gameTime)
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
+            if (previousPosition == Position)
+                return;
+            previousPosition = Position;
 
-            if (timer > animation.FrameSpeed) 
+            if (timer > Animation.FrameSpeed)
             {
                 timer = 0f;
-                animation.CurrentFrame++;
+                Animation.CurrentFrame++;
 
-                if (animation.CurrentFrame >= animation.FrameCount)
-                    animation.CurrentFrame = 0;
+                if (Animation.CurrentFrame >= Animation.FrameCount)
+                {
+                    Animation.CurrentFrame = 0;
+                }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(animation.Texture,
+            spriteBatch.Draw(Animation.Texture,
                             Position,
-                            new Rectangle(animation.CurrentFrame * animation.FrameWidth,
+                            new Rectangle(Animation.CurrentFrame * Animation.FrameWidth,
                                             0,
-                                            animation.FrameWidth,
-                                            animation.FrameHeight),
+                                            Animation.FrameWidth,
+                                            Animation.FrameHeight),
                             Color.White);
         }
     }

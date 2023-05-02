@@ -29,7 +29,7 @@ namespace GameProj
 
             sprites = new List<Sprite>()
             {
-                new Sprite(animations)
+                new Hero(animations)
                 {
                     Input = new Input()
                     {

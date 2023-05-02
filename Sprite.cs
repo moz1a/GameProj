@@ -31,8 +31,12 @@ namespace GameProj
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+                if(texture != null)
+                    return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+                return new Rectangle((int)Position.X, (int)Position.Y, animationManager.Animation.FrameWidth,
+                    animationManager.Animation.FrameHeight);
             }
+            set { }
         }
 
         public Sprite(Texture2D texture)
@@ -44,6 +48,8 @@ namespace GameProj
         {
             this.animations = animations;
             animationManager = new AnimationManager(this.animations.First().Value);
+            this.Rectangle = new Rectangle((int)Position.X, (int)Position.Y, animationManager.Animation.Texture.Width,
+                animationManager.Animation.Texture.Height);
         }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
@@ -79,6 +85,9 @@ namespace GameProj
                 Velocity.Y = -Speed;
             else if (Keyboard.GetState().IsKeyDown(Input.Down))
                 Velocity.Y = Speed;
+
+            Position = Vector2.Clamp(Position, new Vector2(0, 0),
+                new Vector2(Game1.ScreenWidth - this.Rectangle.Width, Game1.ScreenHeight - this.Rectangle.Height));
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
