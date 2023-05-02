@@ -9,11 +9,19 @@
     <File>D:/Game_1/GameProj/Content/File.spritefont</File>
     <File>D:/Game_1/GameProj/Content/Menu.jpg</File>
     <File>D:/Game_1/GameProj/Content/Monster.png</File>
+    <File>D:/Game_1/GameProj/Content/walkDown.png</File>
+    <File>D:/Game_1/GameProj/Content/walkLeft.png</File>
+    <File>D:/Game_1/GameProj/Content/walkRight.png</File>
+    <File>D:/Game_1/GameProj/Content/walkUp.png</File>
   </SourceFiles>
   <DestFiles>
     <File>knight.png</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

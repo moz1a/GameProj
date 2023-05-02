@@ -22,14 +22,16 @@ namespace GameProj
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            ScreenHeight = graphics.PreferredBackBufferHeight;
-            ScreenWidth = graphics.PreferredBackBufferWidth;
+            
         }
 
         protected override void Initialize()
         {
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
+            ScreenHeight = graphics.PreferredBackBufferHeight;
+            ScreenWidth = graphics.PreferredBackBufferWidth;
+            
             base.Initialize();
         }
 
@@ -37,13 +39,21 @@ namespace GameProj
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
-            GameAction.heroSprite = Content.Load<Texture2D>("knight");
             GameAction.monsterSprite = Content.Load<Texture2D>("Monster");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
-            GameAction.Initialise(spriteBatch, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
-            
 
+            var animations = new Dictionary<string, Animation>()
+            {
+                {"walkUp", new Animation(Content.Load<Texture2D>("walkUp"), 5) },
+                {"walkLeft", new Animation(Content.Load<Texture2D>("walkLeft"), 6) },
+                {"walkRight", new Animation(Content.Load<Texture2D>("walkRight"), 6) },
+                {"walkDown", new Animation(Content.Load<Texture2D>("walkDown"), 6) }
+            };
+
+            GameAction.Initialise(spriteBatch, animations, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
+            
 
         }
 
