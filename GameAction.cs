@@ -27,47 +27,47 @@ namespace GameProj
             Width = width;
             Height = height;
 
+            var speedModifire = new Attributes()
+            {
+                Speed = 3f,
+                HealthPoints = 0
+            };
+
+            var player = new Hero(animations)
+            {
+                Input = new Input()
+                {
+                    Up = Keys.W,
+                    Down = Keys.S,
+                    Right = Keys.D,
+                    Left = Keys.A
+                },
+                Position = new Vector2(100, 300),
+
+                StandartAttributes = new Attributes()
+                {
+                    HealthPoints = 5,
+                    Speed = 1f
+                },
+
+                AttributesModifiers = new List<Attributes>()
+                {
+                    speedModifire
+                }
+            };
+
             sprites = new List<Sprite>()
             {
-                new Hero(animations)
+                player,
+
+
+                new Monster(monsterSprite)
                 {
-                    Input = new Input()
-                    {
-                        Up = Keys.W,
-                        Down = Keys.S,
-                        Right = Keys.D,
-                        Left = Keys.A
-                    },
-                    Position = new Vector2(100, 300),
-                    Speed = 1f
+                    Position = new Vector2(300, 100),
+                    Speed = 5f,
+                    FollowTarget = player,
+                    FollowDistance = 50
                 }
-
-
-                //new Hero(heroSprite)
-                //{
-                //    Input = new Input()
-                //    {
-                //        Up = Keys.W,
-                //        Down = Keys.S,
-                //        Right = Keys.D,
-                //        Left = Keys.A
-                //    },
-                //    Position = new Vector2(100, 100),
-                //    Speed = 5f,
-                //},
-
-                //new Hero(monsterSprite)
-                //{
-                //    Input = new Input()
-                //    {
-                //        Up = Keys.Up,
-                //        Down = Keys.Down,
-                //        Right = Keys.Right,
-                //        Left = Keys.Left
-                //    },
-                //    Position = new Vector2(300, 100),
-                //    Speed = 5f,
-                //}
             };
         }
 
@@ -85,15 +85,5 @@ namespace GameProj
             foreach (var sprite in sprites)
                 sprite.Draw(spriteBatch);
         }
-    }
-
-    public class LifeCharacteristics
-    {
-        public int HP;
-        public double Speed;
-        public double Strength;
-        public double Range;
-        public double FireRate;
-        public double BallSpeed;
     }
 }

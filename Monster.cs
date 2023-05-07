@@ -13,7 +13,7 @@ namespace GameProj
         public Monster(Texture2D texture) 
             : base(texture)
         {
-            Position = new Vector2(100, 100);
+            Position = new Vector2(500, 100);
         }
 
        

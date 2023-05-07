@@ -7,13 +7,30 @@ namespace GameProj
 {
     class Hero : Sprite
     {
+        public Attributes StandartAttributes { get; set; }
 
-        public Hero(Dictionary<string, Animation> animations) : base(animations)
+        public List<Attributes> AttributesModifiers { get; set; }
+
+        public Attributes TotalAttributes
         {
+            get
+            {
+                return StandartAttributes + AttributesModifiers.Sum();
+            }
         }
 
+        public Hero(Dictionary<string, Animation> animations) 
+            : base(animations)
+        {
+            StandartAttributes = new Attributes();
+            AttributesModifiers = new List<Attributes>(); 
+        }
 
-
-        
+        public override void Update(GameTime gameTime, List<Sprite> sprites)
+        {
+            Speed = TotalAttributes.Speed;
+            
+            base.Update(gameTime, sprites);
+        }
     }
 }
