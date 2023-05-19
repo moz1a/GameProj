@@ -13,18 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin 1_knight.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:1_knight.png;knight.png
-
 #begin background_1.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -56,7 +44,7 @@
 /processorParam:TextureFormat=Color
 /build:Menu.jpg
 
-#begin Monster.png
+#begin monster_zhele.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -66,7 +54,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Monster.png
+/build:monster_zhele.png
 
 #begin walkDown.png
 /importer:TextureImporter

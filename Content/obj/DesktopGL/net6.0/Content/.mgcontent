@@ -4,18 +4,16 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Game_1/GameProj/Content/1_knight.png</File>
     <File>D:/Game_1/GameProj/Content/background_1.jpg</File>
     <File>D:/Game_1/GameProj/Content/File.spritefont</File>
     <File>D:/Game_1/GameProj/Content/Menu.jpg</File>
-    <File>D:/Game_1/GameProj/Content/Monster.png</File>
+    <File>D:/Game_1/GameProj/Content/monster_zhele.png</File>
     <File>D:/Game_1/GameProj/Content/walkDown.png</File>
     <File>D:/Game_1/GameProj/Content/walkLeft.png</File>
     <File>D:/Game_1/GameProj/Content/walkRight.png</File>
     <File>D:/Game_1/GameProj/Content/walkUp.png</File>
   </SourceFiles>
   <DestFiles>
-    <File>knight.png</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
     <File xsi:nil="true" />

@@ -39,7 +39,7 @@ namespace GameProj
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
-            GameAction.monsterSprite = Content.Load<Texture2D>("Monster");
+            GameAction.monsterSprite = Content.Load<Texture2D>("monster_zhele");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
 

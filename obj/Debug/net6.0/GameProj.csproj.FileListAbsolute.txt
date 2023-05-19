@@ -27,11 +27,12 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\ball.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Background.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Menu.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Font.xnb
-D:\Game_1\GameProj\bin\Debug\net6.0\Content\knight.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\background_1.xnb
-D:\Game_1\GameProj\bin\Debug\net6.0\Content\Monster.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\1_knight.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\walkUp.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\walkLeft.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\walkRight.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\walkDown.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\zhizha.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\zhizha2.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\monster_zhele.xnb

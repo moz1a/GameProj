@@ -81,7 +81,7 @@ namespace GameProj
             rotation = (float)Math.Atan2(distance.Y, distance.X);
             Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
 
-            var currentDistance = Vector2.Distance(this.Position, FollowTarget.Position);
+            var currentDistance = Vector2.Distance(this.Position, FollowTarget.Position) + 100;
 
             if (currentDistance > FollowDistance)
             {
@@ -89,7 +89,6 @@ namespace GameProj
                 var velocity = Direction * t;
                 Velocity = velocity;
             }
-            //Position += Velocity;
         }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
@@ -155,7 +154,7 @@ namespace GameProj
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (texture != null)
-                spriteBatch.Draw(texture, Position, null, Color.White, rotation, Origin, 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, Position, Color.White);
             else if (animationManager != null)
                 animationManager.Draw(spriteBatch);
         }

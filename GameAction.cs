@@ -29,7 +29,7 @@ namespace GameProj
 
             var speedModifire = new Attributes()
             {
-                Speed = 3f,
+                Speed = 1.5f,
                 HealthPoints = 0
             };
 
