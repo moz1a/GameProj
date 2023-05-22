@@ -8,15 +8,22 @@ using System.Linq;
 
 namespace GameProj
 {
-    class Sprite
+    public class Sprite
     {
-        protected Texture2D texture;
-        protected AnimationManager animationManager;
-        protected Dictionary<string, Animation> animations;
-        protected Vector2 position;
-        protected Vector2 origin;
+        public Vector2 Velocity;
+        public float LinearVelocity = 1f;
+        public float Speed = 0.1f;
+        public Input Input;
+        private Texture2D texture;
+        private AnimationManager animationManager;
+        private Dictionary<string, Animation> animations;
+        private Vector2 position;
+        private Vector2 origin;
+        public Sprite FollowTarget { get; set; }
+        public float FollowDistance { get; set; }
+        public bool IsRemoved { get; set; }
         public Vector2 Direction { get; private set; }
-        protected float rotation { get; private set; }
+        private float rotation { get; set; }
 
         public Vector2 Position 
         {
@@ -37,11 +44,7 @@ namespace GameProj
                 origin = value;
             }
         }
-
-        public Vector2 Velocity;
-        public float LinearVelocity = 1f;
-        public float Speed = 0.1f;
-        public Input Input;
+        
         public Rectangle Rectangle
         {
             get
@@ -59,11 +62,6 @@ namespace GameProj
             this.texture = texture;
             Origin = new Vector2(texture.Width / 2, texture.Height / 2);
         }
-
-        public Sprite FollowTarget {  get; set; }
-        public float FollowDistance { get; set; }
-        public bool IsRemoved { get; set; }
-          
 
         public Sprite(Dictionary<string, Animation> animations)
         {
@@ -109,20 +107,6 @@ namespace GameProj
             Velocity = Vector2.Zero;
         }
 
-        private void CheckCollision(List<Sprite> sprites)
-        {
-            foreach (var sprite in sprites)
-            {
-                if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite)
-                || this.Velocity.X < 0 && this.IsTouchingRight(sprite))
-                    this.Velocity.X = 0;
-
-                if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite)
-                 || this.Velocity.Y < 0 && this.IsTouchingBottom(sprite))
-                    this.Velocity.Y = 0;
-            }
-        }
-
         protected virtual void PlayAnimations()
         {
             if (Velocity.X > 0)
@@ -160,6 +144,25 @@ namespace GameProj
         }
 
         #region Collision
+        public void CheckCollision(List<Sprite> sprites)
+        {
+            foreach (var sprite in sprites)
+            {
+                if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite)
+                || this.Velocity.X < 0 && this.IsTouchingRight(sprite))
+                {
+                    this.Velocity.X = 0;
+;
+                }
+
+                if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite)
+                 || this.Velocity.Y < 0 && this.IsTouchingBottom(sprite))
+                {
+                    this.Velocity.Y = 0;
+                }
+            }
+        }
+
         protected bool IsTouchingLeft(Sprite sprite)
         {
             return this.Rectangle.Right + this.Velocity.X > sprite.Rectangle.Left &&

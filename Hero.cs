@@ -32,5 +32,11 @@ namespace GameProj
             
             base.Update(gameTime, sprites);
         }
+
+        //public void GetHit(List<Sprite> sprites)
+        //{
+        //    if (CheckCollision(sprites))
+        //        HealthBar.currentHealth -= 25;
+        //}
     }
 }

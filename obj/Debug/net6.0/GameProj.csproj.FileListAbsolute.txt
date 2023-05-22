@@ -36,3 +36,5 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\walkDown.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\zhizha.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\zhizha2.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\monster_zhele.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\healthBar.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\container.xnb

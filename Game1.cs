@@ -12,8 +12,8 @@ namespace GameProj
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        public static int ScreenHeight;
-        public static int ScreenWidth;
+        public static int ScreenHeight { get; set; }
+        public static int ScreenWidth { get; set; }
         State state { get; set; } = State.Menu;
         
 
@@ -40,8 +40,10 @@ namespace GameProj
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
             GameAction.monsterSprite = Content.Load<Texture2D>("monster_zhele");
+
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
+            GameAction.healthBar = new HealthBar(Content);
 
             var animations = new Dictionary<string, Animation>()
             {
@@ -51,7 +53,7 @@ namespace GameProj
                 {"walkDown", new Animation(Content.Load<Texture2D>("walkDown"), 6) }
             };
 
-            GameAction.Initialise(spriteBatch, animations, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            GameAction.Initialise(spriteBatch, animations, ScreenWidth, ScreenHeight);
 
             
 
@@ -67,12 +69,12 @@ namespace GameProj
             {
                 case State.Menu:
                     Menu.Update();
-                    if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
+                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state);
                     break;
                 case State.Action:
                     GameAction.Update(gameTime);
                     
-                    if (key.IsKeyDown(Keys.Space)) state = ChangeState(state);
+                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state);
                     break;
             }
 
@@ -119,6 +121,4 @@ namespace GameProj
         Action, 
         Menu
     }
-
-
 }

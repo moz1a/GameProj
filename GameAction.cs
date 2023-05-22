@@ -13,13 +13,13 @@ namespace GameProj
         public static Texture2D BackgroundField { get; set; }
         static public SpriteBatch SpriteBatch { get; set; }
         public static int Width, Height;
-
         public static Random rnd = new Random();
         public static Texture2D heroSprite { get; set; }
         public static Texture2D monsterSprite { get; set; }
 
         static List<Sprite> sprites;
 
+        public static HealthBar healthBar;
 
         public static void Initialise(SpriteBatch spriteBatch, Dictionary<string, Animation> animations, int width, int height)
         {
@@ -47,7 +47,7 @@ namespace GameProj
                 StandartAttributes = new Attributes()
                 {
                     HealthPoints = 5,
-                    Speed = 1f
+                    Speed = 3f
                 },
 
                 AttributesModifiers = new List<Attributes>()
@@ -56,34 +56,42 @@ namespace GameProj
                 }
             };
 
+            var monster = new Monster(monsterSprite)
+            {
+                Position = new Vector2(300, 100),
+                Speed = 5f,
+                FollowTarget = player,
+                FollowDistance = 50
+            };
+
+
             sprites = new List<Sprite>()
             {
                 player,
+                monster,
 
 
-                new Monster(monsterSprite)
-                {
-                    Position = new Vector2(300, 100),
-                    Speed = 5f,
-                    FollowTarget = player,
-                    FollowDistance = 50
-                }
+
             };
         }
 
         public static void Update(GameTime gameTime)
         {
+            healthBar.Update();
             foreach (var sprite in sprites)
             {
                 sprite.Update(gameTime, sprites);
             }
+           
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
             SpriteBatch.Draw(BackgroundField, new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
+            healthBar.Draw(spriteBatch);
             foreach (var sprite in sprites)
                 sprite.Draw(spriteBatch);
+
         }
     }
 }
