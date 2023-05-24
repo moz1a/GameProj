@@ -14,8 +14,9 @@ namespace GameProj
         static public SpriteBatch SpriteBatch { get; set; }
         public static int Width, Height;
         public static Random rnd = new Random();
-        public static Texture2D heroSprite { get; set; }
+        //public static Texture2D heroSprite { get; set; }
         public static Texture2D monsterSprite { get; set; }
+        public static Texture2D fireballSprite { get; set; }
 
         static List<Sprite> sprites;
 
@@ -27,10 +28,11 @@ namespace GameProj
             Width = width;
             Height = height;
 
+            
+
             var speedModifire = new Attributes()
             {
                 Speed = 1.5f,
-                HealthPoints = 0
             };
 
             var player = new Hero(animations)
@@ -40,28 +42,40 @@ namespace GameProj
                     Up = Keys.W,
                     Down = Keys.S,
                     Right = Keys.D,
-                    Left = Keys.A
+                    Left = Keys.A,
+                    ShootUp = Keys.Up,
+                    ShootDown = Keys.Down,
+                    ShootRight = Keys.Right,
+                    ShootLeft = Keys.Left
                 },
+
                 Position = new Vector2(100, 300),
+
+                FireBall = new FireBall(fireballSprite),
 
                 StandartAttributes = new Attributes()
                 {
-                    HealthPoints = 5,
                     Speed = 3f
                 },
 
                 AttributesModifiers = new List<Attributes>()
                 {
                     speedModifire
-                }
+                },
+
+                maxHP = 10,
+                CurrentHealth = 10
+                
             };
+
+            healthBar.player = player;
 
             var monster = new Monster(monsterSprite)
             {
                 Position = new Vector2(300, 100),
                 Speed = 5f,
                 FollowTarget = player,
-                FollowDistance = 50
+                FollowDistance = 0
             };
 
 
@@ -78,11 +92,27 @@ namespace GameProj
         public static void Update(GameTime gameTime)
         {
             healthBar.Update();
-            foreach (var sprite in sprites)
+            foreach (var sprite in sprites.ToArray())
             {
                 sprite.Update(gameTime, sprites);
             }
-           
+
+            PostUpdate();
+            //if(healthBar.currentHealth <= 0)
+            //    Game1.
+
+        }
+
+        private static void PostUpdate()
+        {
+            for (int i = 0; i < sprites.Count; i++)
+            {
+                if (sprites[i].IsRemoved)
+                {
+                    sprites.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         public static void Draw(SpriteBatch spriteBatch)

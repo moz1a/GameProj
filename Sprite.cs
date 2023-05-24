@@ -8,8 +8,12 @@ using System.Linq;
 
 namespace GameProj
 {
-    public class Sprite
+    public class Sprite : ICloneable
     {
+        protected KeyboardState currentKey;
+        protected KeyboardState previousKey;
+
+
         public Vector2 Velocity;
         public float LinearVelocity = 1f;
         public float Speed = 0.1f;
@@ -19,19 +23,27 @@ namespace GameProj
         private Dictionary<string, Animation> animations;
         private Vector2 position;
         private Vector2 origin;
-        public Sprite FollowTarget { get; set; }
+        public Hero FollowTarget { get; set; }
         public float FollowDistance { get; set; }
-        public bool IsRemoved { get; set; }
-        public Vector2 Direction { get; private set; }
-        private float rotation { get; set; }
+        public bool IsRemoved = false;
+        public float LifeSpan = 0f;
+        public Sprite Parent;
+        public Vector2 Direction;
+        protected float rotation { get; set; }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
 
         public Vector2 Position 
         {
             get { return position; }
             set 
             {
+                if(texture != null)
+                    position = value + new Vector2(texture.Width/2, texture.Height/2);
                 position = value;
-                if(animationManager != null) 
+                if (animationManager != null) 
                     animationManager.Position = position;
             }
         }
@@ -71,38 +83,15 @@ namespace GameProj
                 animationManager.Animation.Texture.Height);
         }
 
-        protected void Follow()
-        {
-            if (FollowTarget == null) return;
-
-            var distance = FollowTarget.Position - this.Position;
-            rotation = (float)Math.Atan2(distance.Y, distance.X);
-            Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
-
-            var currentDistance = Vector2.Distance(this.Position, FollowTarget.Position) + 100;
-
-            if (currentDistance > FollowDistance)
-            {
-                var t = MathHelper.Min((float)Math.Abs(currentDistance - FollowDistance), LinearVelocity);
-                var velocity = Direction * t;
-                Velocity = velocity;
-            }
-        }
-
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            if (FollowTarget != null)
-                Follow();
-            else
-                Move();
             CheckCollision(sprites);
             if (animationManager != null)
             {
                 PlayAnimations();
                 animationManager.Update(gameTime);
             }
-            
-
+           
             Position += Velocity;
             Velocity = Vector2.Zero;
         }
@@ -119,22 +108,6 @@ namespace GameProj
                 animationManager.Play(animations["walkUp"]);
         }
 
-        protected virtual void Move()
-        {
-            if (Keyboard.GetState().IsKeyDown(Input.Left))
-                Velocity.X = -Speed;
-            else if (Keyboard.GetState().IsKeyDown(Input.Right))
-                Velocity.X = Speed;
-
-            if (Keyboard.GetState().IsKeyDown(Input.Up))
-                Velocity.Y = -Speed;
-            else if (Keyboard.GetState().IsKeyDown(Input.Down))
-                Velocity.Y = Speed;
-
-            Position = Vector2.Clamp(Position, new Vector2(0, 0),
-                new Vector2(Game1.ScreenWidth - this.Rectangle.Width, Game1.ScreenHeight - this.Rectangle.Height));
-        }
-
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (texture != null)
@@ -149,7 +122,7 @@ namespace GameProj
             foreach (var sprite in sprites)
             {
                 if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite)
-                || this.Velocity.X < 0 && this.IsTouchingRight(sprite))
+                 || this.Velocity.X < 0 && this.IsTouchingRight(sprite))
                 {
                     this.Velocity.X = 0;
 ;
@@ -194,6 +167,8 @@ namespace GameProj
                    this.Rectangle.Right > sprite.Rectangle.Left &&
                    this.Rectangle.Left < sprite.Rectangle.Right;
         }
+
+        
         #endregion
     }
 }

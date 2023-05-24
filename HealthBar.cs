@@ -13,11 +13,27 @@ namespace GameProj
 {
     public class HealthBar 
     {
-        public static int currentHealth { get; set; }
-        private static Texture2D container, lifeBar;
-        private static Vector2 position = new Vector2(10, 10);
-        private static int fullHealth;
-        private static Color barColor;
+        public Hero player;
+        public int currentHealth
+        {
+            get
+            {
+                return player.CurrentHealth;
+            }
+            set { }
+        }
+        private Texture2D container, lifeBar;
+        private Vector2 position = new Vector2(10, 10);
+        private int fullHealth;
+        private Color barColor;
+
+        private int HPDivisions
+        {
+            get 
+            {
+                return fullHealth / player.maxHP;
+            }
+        }
 
         public HealthBar(ContentManager content)
         {
@@ -29,27 +45,31 @@ namespace GameProj
 
         public void Update()
         {
-            
             UpdateHealthColor();
         }
 
         public void Draw(SpriteBatch spriteBatch) 
         {
             spriteBatch.Draw(lifeBar, position, new Rectangle((int)position.X, (int)position.Y,
-                currentHealth, lifeBar.Height), barColor);
+                GetHP(), lifeBar.Height), barColor);
             spriteBatch.Draw(container, position, Color.White);
         }
 
         private void UpdateHealthColor()
         {
-            if (currentHealth > lifeBar.Width * 0.80)
+            if (GetHP() > lifeBar.Width * 0.80)
                 barColor = Color.Green;
-            else if (currentHealth > lifeBar.Width * 0.50)
+            else if (GetHP() > lifeBar.Width * 0.50)
                 barColor = Color.Yellow;
-            else if (currentHealth > lifeBar.Width * 0.20)
+            else if (GetHP() > lifeBar.Width * 0.20)
                 barColor = Color.Orange;
             else
                 barColor = Color.Red;
+        }
+
+        private int GetHP()
+        {
+            return HPDivisions * currentHealth;
         }
     }
 }

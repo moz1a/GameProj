@@ -5,9 +5,11 @@
   <Config />
   <SourceFiles>
     <File>D:/Game_1/GameProj/Content/background_1.jpg</File>
-    <File>C:/Users/maxsg/OneDrive/Рабочий стол/healthBar.png</File>
+    <File>C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/Menu.jpg</File>
     <File>D:/Game_1/GameProj/Content/container.png</File>
     <File>D:/Game_1/GameProj/Content/File.spritefont</File>
+    <File>D:/Game_1/GameProj/Content/fireBall.png</File>
+    <File>D:/Game_1/GameProj/Content/healthBar.png</File>
     <File>D:/Game_1/GameProj/Content/Menu.jpg</File>
     <File>D:/Game_1/GameProj/Content/monster_zhele.png</File>
     <File>D:/Game_1/GameProj/Content/walkDown.png</File>
@@ -17,9 +19,11 @@
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
-    <File>healthBar.png</File>
+    <File>Menu.jpg</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

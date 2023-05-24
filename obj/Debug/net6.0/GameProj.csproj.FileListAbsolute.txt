@@ -38,3 +38,5 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\zhizha2.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\monster_zhele.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\healthBar.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\container.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\2Menu.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\fireBall.xnb

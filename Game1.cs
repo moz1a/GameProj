@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Reflection.PortableExecutable;
 using System.Threading;
@@ -15,7 +16,7 @@ namespace GameProj
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
         State state { get; set; } = State.Menu;
-        
+        private static TimeSpan lastTimeChangingState;
 
         public Game1()
         {
@@ -28,10 +29,10 @@ namespace GameProj
         protected override void Initialize()
         {
             graphics.IsFullScreen = false;
-            graphics.ApplyChanges();
+            
             ScreenHeight = graphics.PreferredBackBufferHeight;
             ScreenWidth = graphics.PreferredBackBufferWidth;
-            
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -40,6 +41,7 @@ namespace GameProj
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
             GameAction.monsterSprite = Content.Load<Texture2D>("monster_zhele");
+            GameAction.fireballSprite = Content.Load<Texture2D>("fireBall");
 
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
@@ -54,9 +56,6 @@ namespace GameProj
             };
 
             GameAction.Initialise(spriteBatch, animations, ScreenWidth, ScreenHeight);
-
-            
-
         }
 
         protected override void Update(GameTime gameTime)
@@ -69,21 +68,25 @@ namespace GameProj
             {
                 case State.Menu:
                     Menu.Update();
-                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state);
+                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state, gameTime);
                     break;
                 case State.Action:
                     GameAction.Update(gameTime);
                     
-                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state);
+                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state, gameTime);
                     break;
             }
 
             base.Update(gameTime);
         }
 
-        private static State  ChangeState(State state)
+        private static State ChangeState(State state, GameTime gameTime)
         {
-            Thread.Sleep(100);
+            if (gameTime.TotalGameTime - lastTimeChangingState < TimeSpan.FromSeconds(1))
+                return state;
+
+            lastTimeChangingState = gameTime.TotalGameTime;
+          
             switch (state)
             {
                 case State.Menu:

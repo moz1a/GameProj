@@ -25,7 +25,7 @@
 /processorParam:TextureFormat=Color
 /build:background_1.jpg
 
-#begin C:/Users/maxsg/OneDrive/Рабочий стол/healthBar.png
+#begin C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/Menu.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +35,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:C:/Users/maxsg/OneDrive/Рабочий стол/healthBar.png;healthBar.png
+/build:C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/Menu.jpg;Menu.jpg
 
 #begin container.png
 /importer:TextureImporter
@@ -55,6 +55,30 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont;Font.spritefont
+
+#begin fireBall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:fireBall.png
+
+#begin healthBar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:healthBar.png
 
 #begin Menu.jpg
 /importer:TextureImporter

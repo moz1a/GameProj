@@ -9,7 +9,7 @@ namespace GameProj
 {
     public class Attributes
     {
-        public int HealthPoints { get; set; }   
+        //public int HealthPoints { get; set; }   
 
         public float Speed { get; set; }
 
@@ -17,7 +17,7 @@ namespace GameProj
         {
             return new Attributes()
             {
-                HealthPoints = a.HealthPoints + b.HealthPoints,
+                //HealthPoints = a.HealthPoints + b.HealthPoints,
                 Speed = a.Speed + b.Speed
             };
         }
@@ -25,7 +25,7 @@ namespace GameProj
         {
             return new Attributes()
             {
-                HealthPoints = a.HealthPoints - b.HealthPoints,
+                //HealthPoints = a.HealthPoints - b.HealthPoints,
                 Speed = a.Speed - b.Speed
             };
         }

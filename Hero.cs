@@ -1,16 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace GameProj
 {
-    class Hero : Sprite
+    public class Hero : Sprite
     {
         public Attributes StandartAttributes { get; set; }
-
         public List<Attributes> AttributesModifiers { get; set; }
-
         public Attributes TotalAttributes
         {
             get
@@ -18,6 +17,11 @@ namespace GameProj
                 return StandartAttributes + AttributesModifiers.Sum();
             }
         }
+        public int maxHP;
+        public int CurrentHealth;
+
+        public FireBall FireBall;
+
 
         public Hero(Dictionary<string, Animation> animations) 
             : base(animations)
@@ -28,15 +32,60 @@ namespace GameProj
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            previousKey = currentKey;
+            currentKey = Keyboard.GetState();
             Speed = TotalAttributes.Speed;
-            
+            Move();
+
+            if((previousKey.IsKeyUp(Input.ShootLeft) && currentKey.IsKeyDown(Input.ShootLeft)) ||
+              (previousKey.IsKeyUp(Input.ShootRight) && currentKey.IsKeyDown(Input.ShootRight)) ||
+              (previousKey.IsKeyUp(Input.ShootUp) && currentKey.IsKeyDown(Input.ShootUp)) ||
+              (previousKey.IsKeyUp(Input.ShootDown) && currentKey.IsKeyDown(Input.ShootDown)))
+            {
+                AddFireball(sprites);
+            }
             base.Update(gameTime, sprites);
         }
 
-        //public void GetHit(List<Sprite> sprites)
-        //{
-        //    if (CheckCollision(sprites))
-        //        HealthBar.currentHealth -= 25;
-        //}
+        private void AddFireball(List<Sprite> sprites)
+        {
+            var fireball = FireBall.Clone() as FireBall;
+            fireball.Direction = GetDirectionForShoot();
+            fireball.Position = this.Position;
+            fireball.Speed = this.LinearVelocity;
+            fireball.LifeSpan = 2f;
+            fireball.Parent = this;
+
+            sprites.Add(fireball);
+        }
+        private Vector2 GetDirectionForShoot()
+        {
+            if (Keyboard.GetState().IsKeyDown(Input.ShootLeft))
+                return new Vector2(-1, 0);
+            if (Keyboard.GetState().IsKeyDown(Input.ShootRight))
+                return new Vector2(1, 0);
+            if (Keyboard.GetState().IsKeyDown(Input.ShootUp))
+                return new Vector2(0, -1);
+            if (Keyboard.GetState().IsKeyDown(Input.ShootDown))
+                return new Vector2(0, 1);
+
+            else throw new System.Exception("Invalid direction for shoot");
+        }
+            
+        void Move()
+        {
+            if (Keyboard.GetState().IsKeyDown(Input.Left))
+                Velocity.X = -Speed;
+            else if (Keyboard.GetState().IsKeyDown(Input.Right))
+                Velocity.X = Speed;
+
+            if (Keyboard.GetState().IsKeyDown(Input.Up))
+                Velocity.Y = -Speed;
+            else if (Keyboard.GetState().IsKeyDown(Input.Down))
+                Velocity.Y = Speed;
+
+            Position = Vector2.Clamp(Position, new Vector2(0, 0),
+                new Vector2(Game1.ScreenWidth - this.Rectangle.Width, Game1.ScreenHeight - this.Rectangle.Height));
+        }
     }
 }

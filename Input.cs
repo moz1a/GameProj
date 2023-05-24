@@ -13,5 +13,9 @@ namespace GameProj
         public Keys Right { get; set; }
         public Keys Up { get; set; }
         public Keys Down { get; set; }
+        public Keys ShootLeft { get; set; }
+        public Keys ShootRight { get; set; }
+        public Keys ShootUp { get; set; }
+        public Keys ShootDown { get; set; }
     }
 }
