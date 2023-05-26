@@ -5,24 +5,30 @@
   <Config />
   <SourceFiles>
     <File>D:/Game_1/GameProj/Content/background_1.jpg</File>
+    <File>C:/Users/maxsg/OneDrive/Рабочий стол/walkDown.png</File>
+    <File>C:/Users/maxsg/OneDrive/Рабочий стол/walkLeft.png</File>
+    <File>C:/Users/maxsg/OneDrive/Рабочий стол/walkRight.png</File>
+    <File>C:/Users/maxsg/OneDrive/Рабочий стол/walkUp.png</File>
     <File>C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/Menu.jpg</File>
     <File>D:/Game_1/GameProj/Content/container.png</File>
     <File>D:/Game_1/GameProj/Content/File.spritefont</File>
     <File>D:/Game_1/GameProj/Content/fireBall.png</File>
+    <File>D:/Game_1/GameProj/Content/FontForResult.spritefont</File>
+    <File>D:/Game_1/GameProj/Content/gameOver.jpg</File>
     <File>D:/Game_1/GameProj/Content/healthBar.png</File>
     <File>D:/Game_1/GameProj/Content/Menu.jpg</File>
     <File>D:/Game_1/GameProj/Content/monster_zhele.png</File>
-    <File>D:/Game_1/GameProj/Content/walkDown.png</File>
-    <File>D:/Game_1/GameProj/Content/walkLeft.png</File>
-    <File>D:/Game_1/GameProj/Content/walkRight.png</File>
-    <File>D:/Game_1/GameProj/Content/walkUp.png</File>
+    <File>D:/Game_1/GameProj/Content/Monster.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
+    <File>walkDown.png</File>
+    <File>walkLeft.png</File>
+    <File>walkRight.png</File>
+    <File>walkUp.png</File>
     <File>Menu.jpg</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

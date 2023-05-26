@@ -12,7 +12,8 @@ namespace GameProj
 {
     internal class Monster : Sprite
     {
-        private TimeSpan lastTimeDamaged = TimeSpan.Zero;
+        private TimeSpan lastTimeDamagedPlayer = TimeSpan.Zero;
+        public int CurrentHealth;
         public Monster(Texture2D texture) 
             : base(texture)
         {
@@ -44,9 +45,9 @@ namespace GameProj
         {
             if (currentDistance < 50)
             {
-                if(gameTime.TotalGameTime - lastTimeDamaged > TimeSpan.FromMilliseconds(300))
+                if(gameTime.TotalGameTime - lastTimeDamagedPlayer > TimeSpan.FromMilliseconds(200))
                 {
-                    lastTimeDamaged = gameTime.TotalGameTime;
+                    lastTimeDamagedPlayer = gameTime.TotalGameTime;
                     FollowTarget.CurrentHealth--;
                 }
             }
@@ -56,7 +57,7 @@ namespace GameProj
         {
             if (FollowTarget != null)
                 FollowAndCollisionDamage(gameTime);
-
+            if (CurrentHealth <= 0) IsRemoved = true;
             base.Update(gameTime, sprites);
         }
     }

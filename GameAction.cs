@@ -21,6 +21,7 @@ namespace GameProj
         static List<Sprite> sprites;
 
         public static HealthBar healthBar;
+        public static Hero player;
 
         public static void Initialise(SpriteBatch spriteBatch, Dictionary<string, Animation> animations, int width, int height)
         {
@@ -35,7 +36,7 @@ namespace GameProj
                 Speed = 1.5f,
             };
 
-            var player = new Hero(animations)
+            player = new Hero(animations)
             {
                 Input = new Input()
                 {
@@ -63,8 +64,8 @@ namespace GameProj
                     speedModifire
                 },
 
-                maxHP = 10,
-                CurrentHealth = 10
+                maxHP = 4,
+                CurrentHealth = 4
                 
             };
 
@@ -75,7 +76,8 @@ namespace GameProj
                 Position = new Vector2(300, 100),
                 Speed = 5f,
                 FollowTarget = player,
-                FollowDistance = 0
+                FollowDistance = 0,
+                CurrentHealth = 3
             };
 
 
@@ -98,9 +100,12 @@ namespace GameProj
             }
 
             PostUpdate();
-            //if(healthBar.currentHealth <= 0)
-            //    Game1.
 
+            if (player.IsRemoved)
+            {
+                ResultAfterGame.MonstersKilled = 5;
+                Game1.state = State.ResultAfterGame;
+            }
         }
 
         private static void PostUpdate()

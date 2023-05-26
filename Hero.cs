@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+
 
 namespace GameProj
 {
@@ -42,9 +44,25 @@ namespace GameProj
               (previousKey.IsKeyUp(Input.ShootUp) && currentKey.IsKeyDown(Input.ShootUp)) ||
               (previousKey.IsKeyUp(Input.ShootDown) && currentKey.IsKeyDown(Input.ShootDown)))
             {
-                AddFireball(sprites);
+                if(IsReloaded(gameTime))
+                    AddFireball(sprites);
             }
+
+            if (CurrentHealth <= 0)
+                this.IsRemoved = true;
+
             base.Update(gameTime, sprites);
+        }
+
+        private TimeSpan lastTimeShooted;
+        private bool IsReloaded(GameTime gameTime)
+        {
+            if (gameTime.TotalGameTime - lastTimeShooted > TimeSpan.FromMilliseconds(400))
+            {
+                lastTimeShooted = gameTime.TotalGameTime;
+                return true;
+            }
+            return false;
         }
 
         private void AddFireball(List<Sprite> sprites)

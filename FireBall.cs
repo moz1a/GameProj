@@ -10,7 +10,7 @@ namespace GameProj
     public class FireBall : Sprite
     {
         private float timer;
-        public FireBall(Texture2D texture) 
+        public FireBall(Texture2D texture)
             : base(texture)
         {
         }
@@ -19,9 +19,28 @@ namespace GameProj
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if(timer > LifeSpan)
+            CheckCollision(sprites);
+
+            if (timer > LifeSpan)
                 IsRemoved = true;
             Position += Direction * LinearVelocity * 4;
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+        }
+        public override void CheckCollision(List<Sprite> sprites)
+        {
+            foreach (var sprite in sprites)
+            {
+                if((IsTouchingLeft(sprite) || IsTouchingRight(sprite) || IsTouchingTop(sprite) || IsTouchingBottom(sprite)) &&
+                    sprite is Monster)
+                {
+                    this.IsRemoved = true;
+                    (sprite as Monster).CurrentHealth--;
+                }
+            }
         }
     }
 }

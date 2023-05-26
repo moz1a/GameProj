@@ -12,7 +12,7 @@ namespace GameProj
         private static int timeCounter = 0;
         private static Color color;
         private static Rectangle texturePosition = new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight);
-        private static Vector2 textPosition = new Vector2(Game1.ScreenWidth/16, 50);
+        private static Vector2 textPosition = new Vector2(Game1.ScreenWidth/16, Game1.ScreenHeight * 0.53f);
 
         public static void Update()
         {

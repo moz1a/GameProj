@@ -40,3 +40,10 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\healthBar.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\container.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\2Menu.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\fireBall.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\gameOver.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\FontForResult.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkDown.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkLeft.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkRight.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkUp.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\Monster.xnb

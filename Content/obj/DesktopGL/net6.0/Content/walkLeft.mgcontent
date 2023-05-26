@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/Game_1/GameProj/Content/walkLeft.png</SourceFile>
-  <SourceTime>2023-05-02T18:31:30.8827333+05:00</SourceTime>
+  <SourceFile>C:/Users/maxsg/OneDrive/Рабочий стол/walkLeft.png</SourceFile>
+  <SourceTime>2023-05-25T16:56:45.9584124+05:00</SourceTime>
   <DestFile>D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkLeft.xnb</DestFile>
-  <DestTime>2023-05-02T18:33:22.516727+05:00</DestTime>
+  <DestTime>2023-05-25T17:33:40.5633643+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

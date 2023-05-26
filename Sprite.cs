@@ -117,7 +117,7 @@ namespace GameProj
         }
 
         #region Collision
-        public void CheckCollision(List<Sprite> sprites)
+        public virtual void CheckCollision(List<Sprite> sprites)
         {
             foreach (var sprite in sprites)
             {

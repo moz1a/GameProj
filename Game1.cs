@@ -15,7 +15,7 @@ namespace GameProj
         private SpriteBatch spriteBatch;
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
-        State state { get; set; } = State.Menu;
+        public static State state = State.Menu;
         private static TimeSpan lastTimeChangingState;
 
         public Game1()
@@ -24,15 +24,28 @@ namespace GameProj
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             
+            
+        }
+        GameWindow window;
+        bool isBorderless = false;
+        private void SetFullScreen()
+        {
+            ScreenWidth = Window.ClientBounds.Width;
+            ScreenHeight = Window.ClientBounds.Height;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.HardwareModeSwitch = !isBorderless;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
-            graphics.IsFullScreen = false;
-            
+            SetFullScreen();
+
             ScreenHeight = graphics.PreferredBackBufferHeight;
             ScreenWidth = graphics.PreferredBackBufferWidth;
-            graphics.ApplyChanges();
+
             base.Initialize();
         }
 
@@ -40,16 +53,17 @@ namespace GameProj
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
-            GameAction.monsterSprite = Content.Load<Texture2D>("monster_zhele");
+            GameAction.monsterSprite = Content.Load<Texture2D>("Monster");
             GameAction.fireballSprite = Content.Load<Texture2D>("fireBall");
-
+            ResultAfterGame.Font = Content.Load<SpriteFont>("FontForResult");
+            ResultAfterGame.Background = Content.Load<Texture2D>("gameOver");
             Menu.Background = Content.Load<Texture2D>("Menu");
             Menu.Font = Content.Load<SpriteFont>("Font");
             GameAction.healthBar = new HealthBar(Content);
 
             var animations = new Dictionary<string, Animation>()
             {
-                {"walkUp", new Animation(Content.Load<Texture2D>("walkUp"), 5) },
+                {"walkUp", new Animation(Content.Load<Texture2D>("walkUp"), 6) },
                 {"walkLeft", new Animation(Content.Load<Texture2D>("walkLeft"), 6) },
                 {"walkRight", new Animation(Content.Load<Texture2D>("walkRight"), 6) },
                 {"walkDown", new Animation(Content.Load<Texture2D>("walkDown"), 6) }
@@ -72,8 +86,10 @@ namespace GameProj
                     break;
                 case State.Action:
                     GameAction.Update(gameTime);
-                    
                     if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state, gameTime);
+                    break;
+                case State.ResultAfterGame:
+                    ResultAfterGame.Update();
                     break;
             }
 
@@ -113,15 +129,19 @@ namespace GameProj
                 case State.Action:
                     GameAction.Draw(spriteBatch);             
                     break;
+                case State.ResultAfterGame:
+                    ResultAfterGame.Draw(spriteBatch);
+                    break;
             }
             spriteBatch.End();
             base.Draw(gameTime);
         }
     }
 
-    enum State
+    public enum State
     {
         Action, 
-        Menu
+        Menu,
+        ResultAfterGame
     }
 }
