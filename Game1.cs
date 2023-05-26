@@ -26,7 +26,7 @@ namespace GameProj
             
             
         }
-        GameWindow window;
+
         bool isBorderless = false;
         private void SetFullScreen()
         {
@@ -53,7 +53,8 @@ namespace GameProj
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
-            GameAction.monsterSprite = Content.Load<Texture2D>("Monster");
+            GameAction.monsterSprite = Content.Load<Texture2D>("monster_zhele");
+            GameAction.monsterFireballSprite = Content.Load<Texture2D>("monsterFireball");
             GameAction.fireballSprite = Content.Load<Texture2D>("fireBall");
             ResultAfterGame.Font = Content.Load<SpriteFont>("FontForResult");
             ResultAfterGame.Background = Content.Load<Texture2D>("gameOver");

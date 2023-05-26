@@ -2,28 +2,26 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace GameProj
 {
     internal class Monster : Sprite
     {
         private TimeSpan lastTimeDamagedPlayer = TimeSpan.Zero;
+        private TimeSpan lastTimeShooted = TimeSpan.Zero;
         public int CurrentHealth;
-        public Monster(Texture2D texture) 
+        public FireBall FireBall;
+
+        public Monster(Texture2D texture)
             : base(texture)
         {
-            Position = new Vector2(500, 100);
+            Position = new Vector2(1500, 400);
         }
 
         protected void FollowAndCollisionDamage(GameTime gameTime)
         {
             if (FollowTarget == null) return;
-
+            LinearVelocity = Speed;
             var distance = FollowTarget.Position - this.Position;
             rotation = (float)Math.Atan2(distance.Y, distance.X);
             Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
@@ -40,12 +38,23 @@ namespace GameProj
             MakeDelayBeforeNextDamage(currentDistance, gameTime);
 
         }
+        private void ShootMonster(List<Sprite> sprites)
+        {
+            var fireball = FireBall.Clone() as FireBall;
+            fireball.Direction = this.Direction;
+            fireball.Position = this.Position;
+            fireball.LinearVelocity = Speed * 0.6f;
+            fireball.LifeSpan = 7f;
+            fireball.Parent = this;
+
+            sprites.Add(fireball);
+        }
 
         private void MakeDelayBeforeNextDamage(float currentDistance, GameTime gameTime)
         {
-            if (currentDistance < 50)
+            if (currentDistance < 55)
             {
-                if(gameTime.TotalGameTime - lastTimeDamagedPlayer > TimeSpan.FromMilliseconds(200))
+                if (gameTime.TotalGameTime - lastTimeDamagedPlayer > TimeSpan.FromMilliseconds(200))
                 {
                     lastTimeDamagedPlayer = gameTime.TotalGameTime;
                     FollowTarget.CurrentHealth--;
@@ -57,6 +66,13 @@ namespace GameProj
         {
             if (FollowTarget != null)
                 FollowAndCollisionDamage(gameTime);
+
+            if (gameTime.TotalGameTime - lastTimeShooted > TimeSpan.FromMilliseconds(1000))
+            {
+                lastTimeShooted = gameTime.TotalGameTime;
+                ShootMonster(sprites);
+            }
+
             if (CurrentHealth <= 0) IsRemoved = true;
             base.Update(gameTime, sprites);
         }

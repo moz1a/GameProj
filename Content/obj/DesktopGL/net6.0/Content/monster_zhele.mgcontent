@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/Game_1/GameProj/Content/monster_zhele.png</SourceFile>
-  <SourceTime>2023-05-17T22:24:47.3048323+05:00</SourceTime>
+  <SourceTime>2023-05-26T12:38:44.2826772+05:00</SourceTime>
   <DestFile>D:/Game_1/GameProj/Content/bin/DesktopGL/Content/monster_zhele.xnb</DestFile>
-  <DestTime>2023-05-19T18:25:40.1835641+05:00</DestTime>
+  <DestTime>2023-05-26T12:39:14.6597249+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

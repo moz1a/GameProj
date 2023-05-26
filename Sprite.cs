@@ -121,15 +121,14 @@ namespace GameProj
         {
             foreach (var sprite in sprites)
             {
-                if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite)
-                 || this.Velocity.X < 0 && this.IsTouchingRight(sprite))
+                if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite) && !(sprite is FireBall)
+                 || this.Velocity.X < 0 && this.IsTouchingRight(sprite) && !(sprite is FireBall))
                 {
                     this.Velocity.X = 0;
-;
                 }
 
-                if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite)
-                 || this.Velocity.Y < 0 && this.IsTouchingBottom(sprite))
+                if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite) && !(sprite is FireBall)
+                 || this.Velocity.Y < 0 && this.IsTouchingBottom(sprite) && !(sprite is FireBall))
                 {
                     this.Velocity.Y = 0;
                 }

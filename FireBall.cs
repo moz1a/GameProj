@@ -35,10 +35,13 @@ namespace GameProj
             foreach (var sprite in sprites)
             {
                 if((IsTouchingLeft(sprite) || IsTouchingRight(sprite) || IsTouchingTop(sprite) || IsTouchingBottom(sprite)) &&
-                    sprite is Monster)
+                    (sprite is Monster || sprite is Hero) && this.Parent != sprite)
                 {
                     this.IsRemoved = true;
-                    (sprite as Monster).CurrentHealth--;
+                    if(sprite is Monster)
+                        (sprite as Monster).CurrentHealth--;
+                    else
+                        (sprite as Hero).CurrentHealth--;
                 }
             }
         }

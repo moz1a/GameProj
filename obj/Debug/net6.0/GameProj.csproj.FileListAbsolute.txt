@@ -47,3 +47,4 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkLeft.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkRight.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkUp.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Monster.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\monsterFireball.xnb

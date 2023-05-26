@@ -70,12 +70,27 @@ namespace GameProj
             var fireball = FireBall.Clone() as FireBall;
             fireball.Direction = GetDirectionForShoot();
             fireball.Position = this.Position;
-            fireball.Speed = this.LinearVelocity;
+            SetVelocityFireball(fireball);
             fireball.LifeSpan = 2f;
             fireball.Parent = this;
 
             sprites.Add(fireball);
         }
+
+        private void SetVelocityFireball(FireBall fireBall)
+        {
+            if (Keyboard.GetState().IsKeyDown(Input.ShootRight) && Keyboard.GetState().IsKeyDown(Input.Right))
+                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+            else if (Keyboard.GetState().IsKeyDown(Input.ShootLeft) && Keyboard.GetState().IsKeyDown(Input.Left))
+                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+            else if (Keyboard.GetState().IsKeyDown(Input.ShootDown) && Keyboard.GetState().IsKeyDown(Input.Down))
+                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+            else if (Keyboard.GetState().IsKeyDown(Input.ShootUp) && Keyboard.GetState().IsKeyDown(Input.Up))
+                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+            else
+                fireBall.LinearVelocity = this.LinearVelocity;
+        }
+
         private Vector2 GetDirectionForShoot()
         {
             if (Keyboard.GetState().IsKeyDown(Input.ShootLeft))
@@ -87,7 +102,7 @@ namespace GameProj
             if (Keyboard.GetState().IsKeyDown(Input.ShootDown))
                 return new Vector2(0, 1);
 
-            else throw new System.Exception("Invalid direction for shoot");
+            else throw new Exception("Invalid direction for shoot");
         }
             
         void Move()

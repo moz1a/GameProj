@@ -14,9 +14,9 @@ namespace GameProj
         static public SpriteBatch SpriteBatch { get; set; }
         public static int Width, Height;
         public static Random rnd = new Random();
-        //public static Texture2D heroSprite { get; set; }
         public static Texture2D monsterSprite { get; set; }
         public static Texture2D fireballSprite { get; set; }
+        public static Texture2D monsterFireballSprite { get; set; }
 
         static List<Sprite> sprites;
 
@@ -73,8 +73,9 @@ namespace GameProj
 
             var monster = new Monster(monsterSprite)
             {
+                FireBall = new FireBall(monsterFireballSprite),
                 Position = new Vector2(300, 100),
-                Speed = 5f,
+                Speed = 2.5f,
                 FollowTarget = player,
                 FollowDistance = 0,
                 CurrentHealth = 3
