@@ -11,7 +11,7 @@ namespace GameProj
         public static SpriteFont Font;
         private static Rectangle texturePosition = new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight);
         private static Vector2 textPosition = new Vector2(Game1.ScreenWidth / 16, Game1.ScreenHeight * 0.8f);
-        public static int MonstersKilled;
+        public static int MonstersKilled = 0;
         private static int timeCounter = 0;
         private static Color color;
 

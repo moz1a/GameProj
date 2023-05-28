@@ -31,7 +31,7 @@ namespace GameProj
         {
             get 
             {
-                return fullHealth / player.maxHP;
+                return fullHealth / player.maxHealth;
             }
         }
 

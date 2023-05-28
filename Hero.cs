@@ -19,9 +19,9 @@ namespace GameProj
                 return StandartAttributes + AttributesModifiers.Sum();
             }
         }
-        public int maxHP;
+        public int maxHealth;
         public int CurrentHealth;
-
+        private TimeSpan lastTimeShooted;
         public FireBall FireBall;
 
 
@@ -54,7 +54,6 @@ namespace GameProj
             base.Update(gameTime, sprites);
         }
 
-        private TimeSpan lastTimeShooted;
         private bool IsReloaded(GameTime gameTime)
         {
             if (gameTime.TotalGameTime - lastTimeShooted > TimeSpan.FromMilliseconds(400))
@@ -79,13 +78,13 @@ namespace GameProj
 
         private void SetVelocityFireball(FireBall fireBall)
         {
-            if (Keyboard.GetState().IsKeyDown(Input.ShootRight) && Keyboard.GetState().IsKeyDown(Input.Right))
+            if (Keyboard.GetState().IsKeyDown(Input.ShootRight) && Keyboard.GetState().IsKeyDown(Input.GoRight))
                 fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
-            else if (Keyboard.GetState().IsKeyDown(Input.ShootLeft) && Keyboard.GetState().IsKeyDown(Input.Left))
+            else if (Keyboard.GetState().IsKeyDown(Input.ShootLeft) && Keyboard.GetState().IsKeyDown(Input.GoLeft))
                 fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
-            else if (Keyboard.GetState().IsKeyDown(Input.ShootDown) && Keyboard.GetState().IsKeyDown(Input.Down))
+            else if (Keyboard.GetState().IsKeyDown(Input.ShootDown) && Keyboard.GetState().IsKeyDown(Input.GoDown))
                 fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
-            else if (Keyboard.GetState().IsKeyDown(Input.ShootUp) && Keyboard.GetState().IsKeyDown(Input.Up))
+            else if (Keyboard.GetState().IsKeyDown(Input.ShootUp) && Keyboard.GetState().IsKeyDown(Input.GoUp))
                 fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
             else
                 fireBall.LinearVelocity = this.LinearVelocity;
@@ -107,14 +106,14 @@ namespace GameProj
             
         void Move()
         {
-            if (Keyboard.GetState().IsKeyDown(Input.Left))
+            if (Keyboard.GetState().IsKeyDown(Input.GoLeft))
                 Velocity.X = -Speed;
-            else if (Keyboard.GetState().IsKeyDown(Input.Right))
+            else if (Keyboard.GetState().IsKeyDown(Input.GoRight))
                 Velocity.X = Speed;
 
-            if (Keyboard.GetState().IsKeyDown(Input.Up))
+            if (Keyboard.GetState().IsKeyDown(Input.GoUp))
                 Velocity.Y = -Speed;
-            else if (Keyboard.GetState().IsKeyDown(Input.Down))
+            else if (Keyboard.GetState().IsKeyDown(Input.GoDown))
                 Velocity.Y = Speed;
 
             Position = Vector2.Clamp(Position, new Vector2(0, 0),

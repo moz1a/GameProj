@@ -18,7 +18,7 @@ namespace GameProj
         public float LinearVelocity = 1f;
         public float Speed = 0.1f;
         public Input Input;
-        private Texture2D texture;
+        protected Texture2D texture;
         private AnimationManager animationManager;
         private Dictionary<string, Animation> animations;
         private Vector2 position;
@@ -121,14 +121,14 @@ namespace GameProj
         {
             foreach (var sprite in sprites)
             {
-                if (this.Velocity.X > 0 && this.IsTouchingLeft(sprite) && !(sprite is FireBall)
-                 || this.Velocity.X < 0 && this.IsTouchingRight(sprite) && !(sprite is FireBall))
+                if ((this.Velocity.X > 0 && this.IsTouchingLeft(sprite) || this.Velocity.X < 0 && this.IsTouchingRight(sprite)) &&
+                    !(sprite is FireBall) && !(sprite is HealthPotion))
                 {
                     this.Velocity.X = 0;
                 }
 
-                if (this.Velocity.Y > 0 && this.IsTouchingTop(sprite) && !(sprite is FireBall)
-                 || this.Velocity.Y < 0 && this.IsTouchingBottom(sprite) && !(sprite is FireBall))
+                if ((this.Velocity.Y > 0 && this.IsTouchingTop(sprite) || this.Velocity.Y < 0 && this.IsTouchingBottom(sprite)) &&
+                    !(sprite is FireBall) && !(sprite is HealthPotion))
                 {
                     this.Velocity.Y = 0;
                 }
@@ -167,7 +167,11 @@ namespace GameProj
                    this.Rectangle.Left < sprite.Rectangle.Right;
         }
 
-        
+        protected bool IsTouching(Sprite sprite)
+        {
+            return IsTouchingBottom(sprite) || IsTouchingTop(sprite) ||
+                   IsTouchingLeft(sprite) || IsTouchingRight(sprite);
+        }
         #endregion
     }
 }

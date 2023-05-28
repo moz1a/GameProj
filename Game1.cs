@@ -15,7 +15,7 @@ namespace GameProj
         private SpriteBatch spriteBatch;
         public static int ScreenHeight { get; set; }
         public static int ScreenWidth { get; set; }
-        public static State state = State.Menu;
+        public static State State = State.Menu;
         private static TimeSpan lastTimeChangingState;
 
         public Game1()
@@ -56,6 +56,7 @@ namespace GameProj
             GameAction.monsterSprite = Content.Load<Texture2D>("monster_zhele");
             GameAction.monsterFireballSprite = Content.Load<Texture2D>("monsterFireball");
             GameAction.fireballSprite = Content.Load<Texture2D>("fireBall");
+            GameAction.healthPotionSprite = Content.Load<Texture2D>("healthPotion");
             ResultAfterGame.Font = Content.Load<SpriteFont>("FontForResult");
             ResultAfterGame.Background = Content.Load<Texture2D>("gameOver");
             Menu.Background = Content.Load<Texture2D>("Menu");
@@ -79,15 +80,15 @@ namespace GameProj
             if (key.IsKeyDown(Keys.Escape))
                 Exit();
 
-            switch (state)
+            switch (State)
             {
                 case State.Menu:
                     Menu.Update();
-                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state, gameTime);
+                    if (key.IsKeyDown(Keys.Enter)) State = ChangeState(State, gameTime);
                     break;
                 case State.Action:
                     GameAction.Update(gameTime);
-                    if (key.IsKeyDown(Keys.Enter)) state = ChangeState(state, gameTime);
+                    if (key.IsKeyDown(Keys.Enter)) State = ChangeState(State, gameTime);
                     break;
                 case State.ResultAfterGame:
                     ResultAfterGame.Update();
@@ -122,7 +123,7 @@ namespace GameProj
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            switch (state)
+            switch (State)
             {
                 case State.Menu:
                     Menu.Draw(spriteBatch);

@@ -16,6 +16,7 @@
     <File>D:/Game_1/GameProj/Content/FontForResult.spritefont</File>
     <File>D:/Game_1/GameProj/Content/gameOver.jpg</File>
     <File>D:/Game_1/GameProj/Content/healthBar.png</File>
+    <File>D:/Game_1/GameProj/Content/healthPotion.png</File>
     <File>D:/Game_1/GameProj/Content/Menu.jpg</File>
     <File>D:/Game_1/GameProj/Content/monster_zhele.png</File>
     <File>D:/Game_1/GameProj/Content/Monster.png</File>
@@ -34,6 +35,7 @@
     <File>walkUp.png</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

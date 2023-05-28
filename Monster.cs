@@ -2,23 +2,24 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace GameProj
 {
-    internal class Monster : Sprite
+    public class Monster : Sprite
     {
         private TimeSpan lastTimeDamagedPlayer = TimeSpan.Zero;
         private TimeSpan lastTimeShooted = TimeSpan.Zero;
         public int CurrentHealth;
         public FireBall FireBall;
+        private static Random random = new Random();
 
         public Monster(Texture2D texture)
             : base(texture)
         {
-            Position = new Vector2(1500, 400);
         }
 
-        protected void FollowAndCollisionDamage(GameTime gameTime)
+        private void FollowAndCollisionDamage(GameTime gameTime)
         {
             if (FollowTarget == null) return;
             LinearVelocity = Speed;
@@ -36,13 +37,13 @@ namespace GameProj
             }
 
             MakeDelayBeforeNextDamage(currentDistance, gameTime);
-
         }
+
         private void ShootMonster(List<Sprite> sprites)
         {
             var fireball = FireBall.Clone() as FireBall;
             fireball.Direction = this.Direction;
-            fireball.Position = this.Position;
+            fireball.Position = Position + new Vector2(this.texture.Width/4 + this.texture.Height/4);
             fireball.LinearVelocity = Speed * 0.6f;
             fireball.LifeSpan = 7f;
             fireball.Parent = this;
@@ -73,7 +74,12 @@ namespace GameProj
                 ShootMonster(sprites);
             }
 
-            if (CurrentHealth <= 0) IsRemoved = true;
+            if (CurrentHealth <= 0)
+            {
+                IsRemoved = true;
+                if (random.Next(0, 100) >= 80)
+                    sprites.Add(new HealthPotion(GameAction.healthPotionSprite, Position));
+            }
             base.Update(gameTime, sprites);
         }
     }
