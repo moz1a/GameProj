@@ -13,12 +13,12 @@ namespace GameProj
 {
     public class HealthBar 
     {
-        public Hero player;
+        public Hero Player;
         public int currentHealth
         {
             get
             {
-                return player.CurrentHealth;
+                return Player.CurrentHealth;
             }
             set { }
         }
@@ -31,7 +31,7 @@ namespace GameProj
         {
             get 
             {
-                return fullHealth / player.maxHealth;
+                return fullHealth / Player.maxHealth;
             }
         }
 
@@ -59,9 +59,9 @@ namespace GameProj
         {
             if (GetHP() > lifeBar.Width * 0.80)
                 barColor = Color.Green;
-            else if (GetHP() > lifeBar.Width * 0.50)
+            else if (GetHP() > lifeBar.Width * 0.65)
                 barColor = Color.Yellow;
-            else if (GetHP() > lifeBar.Width * 0.20)
+            else if (GetHP() > lifeBar.Width * 0.30)
                 barColor = Color.Orange;
             else
                 barColor = Color.Red;

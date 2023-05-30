@@ -24,7 +24,7 @@ namespace GameProj
         private Vector2 position;
         private Vector2 origin;
         public Hero FollowTarget { get; set; }
-        public float FollowDistance { get; set; }
+        public float DistanceToApproximate { get; set; }
         public bool IsRemoved = false;
         public float LifeSpan = 0f;
         public Sprite Parent;

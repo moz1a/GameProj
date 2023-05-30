@@ -79,13 +79,13 @@ namespace GameProj
         private void SetVelocityFireball(FireBall fireBall)
         {
             if (Keyboard.GetState().IsKeyDown(Input.ShootRight) && Keyboard.GetState().IsKeyDown(Input.GoRight))
-                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+                fireBall.LinearVelocity = this.LinearVelocity * 1.6f;
             else if (Keyboard.GetState().IsKeyDown(Input.ShootLeft) && Keyboard.GetState().IsKeyDown(Input.GoLeft))
-                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+                fireBall.LinearVelocity = this.LinearVelocity * 1.6f;
             else if (Keyboard.GetState().IsKeyDown(Input.ShootDown) && Keyboard.GetState().IsKeyDown(Input.GoDown))
-                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+                fireBall.LinearVelocity = this.LinearVelocity * 1.6f;
             else if (Keyboard.GetState().IsKeyDown(Input.ShootUp) && Keyboard.GetState().IsKeyDown(Input.GoUp))
-                fireBall.LinearVelocity = this.LinearVelocity * 1.5f;
+                fireBall.LinearVelocity = this.LinearVelocity * 1.6f;
             else
                 fireBall.LinearVelocity = this.LinearVelocity;
         }

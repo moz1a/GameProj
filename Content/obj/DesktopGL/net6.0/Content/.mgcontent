@@ -21,10 +21,12 @@
     <File>D:/Game_1/GameProj/Content/monster_zhele.png</File>
     <File>D:/Game_1/GameProj/Content/Monster.png</File>
     <File>D:/Game_1/GameProj/Content/monsterFireball.png</File>
+    <File>D:/Game_1/GameProj/Content/skelet.png</File>
     <File>D:/Game_1/GameProj/Content/walkDown.png</File>
     <File>D:/Game_1/GameProj/Content/walkLeft.png</File>
     <File>D:/Game_1/GameProj/Content/walkRight.png</File>
     <File>D:/Game_1/GameProj/Content/walkUp.png</File>
+    <File>D:/Game_1/GameProj/Content/wizard.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
@@ -35,6 +37,8 @@
     <File>walkUp.png</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

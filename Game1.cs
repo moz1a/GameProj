@@ -53,7 +53,9 @@ namespace GameProj
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             GameAction.BackgroundField = Content.Load<Texture2D>("background_1");
-            GameAction.monsterSprite = Content.Load<Texture2D>("monster_zhele");
+            GameAction.slugSprite = Content.Load<Texture2D>("monster_zhele");
+            GameAction.skeletonSprite = Content.Load<Texture2D>("skelet");
+            GameAction.wizardSprite = Content.Load<Texture2D>("wizard");
             GameAction.monsterFireballSprite = Content.Load<Texture2D>("monsterFireball");
             GameAction.fireballSprite = Content.Load<Texture2D>("fireBall");
             GameAction.healthPotionSprite = Content.Load<Texture2D>("healthPotion");

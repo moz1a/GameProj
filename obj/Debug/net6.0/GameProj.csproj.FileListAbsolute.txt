@@ -49,3 +49,5 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\2walkUp.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\Monster.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\monsterFireball.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\healthPotion.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\wizard.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\skelet.xnb
