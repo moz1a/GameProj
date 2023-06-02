@@ -23,8 +23,6 @@ namespace GameProj
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            
-            
         }
 
         bool isBorderless = false;
@@ -97,7 +95,6 @@ namespace GameProj
                     ResultAfterGame.Update();
                     break;
             }
-
             base.Update(gameTime);
         }
 
@@ -122,9 +119,7 @@ namespace GameProj
 
         protected override void Draw(GameTime gameTime)
         {
-
             GraphicsDevice.Clear(Color.Black);
-
             spriteBatch.Begin();
             switch (State)
             {

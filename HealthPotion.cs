@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-
 namespace GameProj
 {
     public class HealthPotion : Sprite

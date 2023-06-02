@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -72,8 +71,6 @@ namespace GameProj
         {
             this.Texture = texture;
             Origin = new Vector2(texture.Width / 2, texture.Height / 2);
-
-            
         }
 
         public Sprite(Dictionary<string, Animation> animations)
@@ -92,7 +89,6 @@ namespace GameProj
                 PlayAnimations();
                 animationManager.Update(gameTime);
             }
-           
             Position += Velocity;
             Velocity = Vector2.Zero;
         }
@@ -175,7 +171,7 @@ namespace GameProj
         }
 
         static public bool CheckPerPixelCollision(Rectangle rectangleA, Texture2D textureA,
-                            Rectangle rectangleB, Texture2D textureB)
+                                                  Rectangle rectangleB, Texture2D textureB)
         {
             Color[] dataA = new Color[textureA.Width * textureA.Height];
             Color[] dataB = new Color[textureB.Width * textureB.Height];
@@ -202,7 +198,6 @@ namespace GameProj
             }
             return false;
         }
-
         #endregion
     }
 }

@@ -1,10 +1,8 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-
 
 namespace GameProj
 {
@@ -23,7 +21,6 @@ namespace GameProj
         public int CurrentHealth;
         private TimeSpan lastTimeShooted;
         public FireBall FireBall;
-
 
         public Hero(Dictionary<string, Animation> animations) 
             : base(animations)

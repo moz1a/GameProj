@@ -1,7 +1,5 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace GameProj
 {
@@ -23,8 +21,7 @@ namespace GameProj
         public static void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Background, texturePosition, Color.White);
-            spriteBatch.DrawString(Font, "Oblivion liberty", textPosition, color);
-
+            spriteBatch.DrawString(Font, "Eternity fight", textPosition, color);
         }
     }
 }

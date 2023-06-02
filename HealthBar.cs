@@ -1,20 +1,13 @@
-﻿using Microsoft.VisualBasic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.Net.Mime;
-using System.Reflection.PortableExecutable;
-using System.Threading;
-
 
 namespace GameProj
 {
     public class HealthBar 
     {
         public Hero Player;
-        public int currentHealth
+        public int СurrentHealth
         {
             get
             {
@@ -40,7 +33,7 @@ namespace GameProj
             container = content.Load<Texture2D>("container");
             lifeBar = content.Load<Texture2D>("healthBar");
             fullHealth = lifeBar.Width;
-            currentHealth = fullHealth;
+            СurrentHealth = fullHealth;
         }
 
         public void Update()
@@ -69,7 +62,7 @@ namespace GameProj
 
         private int GetHP()
         {
-            return HPDivisions * currentHealth;
+            return HPDivisions * СurrentHealth;
         }
     }
 }
