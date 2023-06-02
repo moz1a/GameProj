@@ -8,23 +8,17 @@ namespace GameProj
 {
     class GameAction
     {
-        public static Texture2D BackgroundField { get; set; }
+        public static Texture2D BackgroundFieldTexture { get; set; }
         static public SpriteBatch SpriteBatch { get; set; }
         public static int Width, Height;
         public static Random random = new Random();
-        public static Texture2D slugSprite { get; set; }
-        public static Texture2D skeletonSprite { get; set; }
-        public static Texture2D wizardSprite { get; set; }
-        public static Texture2D fireballSprite { get; set; }
-        public static Texture2D monsterFireballSprite { get; set; }
-        public static Texture2D healthPotionSprite { get; set; }
-
+        public static Texture2D testPic { get; set; }
         static List<Sprite> sprites;
-
         public static HealthBar healthBar;
         public static Hero player;
         private static TimeSpan timer;
         private static int monstersCount = 0;
+
         public static void Initialise(SpriteBatch spriteBatch, Dictionary<string, Animation> animations, int width, int height)
         {
             SpriteBatch = spriteBatch;
@@ -52,7 +46,7 @@ namespace GameProj
 
                 Position = new Vector2(100, 300),
 
-                FireBall = new FireBall(fireballSprite),
+                FireBall = new FireBall(FireBall.fireballTexture),
 
                 StandartAttributes = new Attributes()
                 {
@@ -78,71 +72,6 @@ namespace GameProj
             
         }
 
-        private static void GenerateMonster(GameTime gameTime)
-        {
-            var chanceToSpawn = random.Next(0, 100);
-            if (chanceToSpawn <= 33)
-                sprites.Add(CreateWizard());
-            else if (chanceToSpawn > 33 && chanceToSpawn <= 66)
-                sprites.Add(CreateSlug());
-            else
-                sprites.Add(CreateSkeleton());
-
-            monstersCount++;
-        }
-
-        private static Monster CreateSkeleton()
-        {
-            return new Monster(skeletonSprite)
-            {
-                Position = SetRandomMonsterPosition(random),
-                Speed = 2.3f,
-                FollowTarget = player,
-                DistanceToApproximate = 0,
-                CurrentHealth = 7,
-            };
-        }
-
-        private static Monster CreateSlug()
-        {
-            var slug = new Monster(slugSprite)
-            {
-                FireBall = new FireBall(monsterFireballSprite),
-                Position = SetRandomMonsterPosition(random),
-                Speed = 2f,
-                FollowTarget = player,
-                DistanceToApproximate = 0,
-                CurrentHealth = 4,
-            };
-            slug.Shooting = slug.MakeDefaultDirectionToShot;
-            return slug;
-        }
-
-        private static Monster CreateWizard()
-        {
-            var wizard = new Monster(wizardSprite)
-            {
-                FireBall = new FireBall(monsterFireballSprite),
-                Position = SetRandomMonsterPosition(random),
-                Speed = 1.5f,
-                FollowTarget = player,
-                DistanceToApproximate = 300,
-                CurrentHealth = 3,
-            };
-            wizard.Shooting = wizard.MakeTripleShot;
-            return wizard;
-        }
-
-        private static Vector2 SetRandomMonsterPosition(Random random)
-        {
-            while (true)
-            {
-                var position = new Vector2(random.Next(0, Width), random.Next(0, Height));
-                if (Vector2.Distance(position, player.Position) > 200)
-                    return position;
-            }
-        }
-
         public static void Update(GameTime gameTime)
         {
             healthBar.Update();
@@ -150,7 +79,9 @@ namespace GameProj
             if ((gameTime.TotalGameTime - timer > TimeSpan.FromSeconds(3)) || monstersCount == 0)
             {
                 timer = gameTime.TotalGameTime;
-                GenerateMonster(gameTime);
+                if(random.Next(0, 100) >= 75)
+                    Monster.GenerateRandomMonster(gameTime, sprites, ref monstersCount);
+                Monster.GenerateRandomMonster(gameTime, sprites, ref monstersCount);
             }
 
             foreach (var sprite in sprites.ToArray())
@@ -183,8 +114,7 @@ namespace GameProj
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            SpriteBatch.Draw(BackgroundField, new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
-            
+            SpriteBatch.Draw(BackgroundFieldTexture, new Rectangle(0, 0, Game1.ScreenWidth, Game1.ScreenHeight), Color.White);
             healthBar.Draw(spriteBatch);
             foreach (var sprite in sprites)
                 sprite.Draw(spriteBatch);

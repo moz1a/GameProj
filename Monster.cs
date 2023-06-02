@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,34 @@ namespace GameProj
 {
     public class Monster : Sprite
     {
+        public static Texture2D slugTexture { get; set; }
+        public static Texture2D skeletonTexture { get; set; }
+        public static Texture2D wizardTexture { get; set; }
+        public static Texture2D monsterFireballTexture { get; set; }
+
         private TimeSpan lastTimeDamagedPlayer = TimeSpan.Zero;
         private TimeSpan lastTimeShooted = TimeSpan.Zero;
         public int CurrentHealth;
         public FireBall FireBall;
         private static Random random = new Random();
         public Func<List<Vector2>> Shooting;
-
+        private float currentDistanceToPlayer;
         public Monster(Texture2D texture)
             : base(texture)
         {
+        }
+
+        public static void GenerateRandomMonster(GameTime gameTime, List<Sprite> sprites, ref int monstersCount)
+        {
+            var chanceToSpawn = random.Next(0, 100);
+            if (chanceToSpawn <= 33)
+                sprites.Add(CreateWizard());
+            else if (chanceToSpawn > 33 && chanceToSpawn <= 66)
+                sprites.Add(CreateSlug());
+            else
+                sprites.Add(CreateSkeleton());
+
+            monstersCount++;
         }
 
         private void FollowAndCollisionDamage(GameTime gameTime)
@@ -28,21 +47,22 @@ namespace GameProj
             rotation = (float)Math.Atan2(distance.Y, distance.X);
             Direction = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
 
-            var currentDistance = Vector2.Distance(this.Position, FollowTarget.Position);
+            currentDistanceToPlayer = Vector2.Distance(this.Position, FollowTarget.Position);
 
-            if (currentDistance > DistanceToApproximate)
+            if (currentDistanceToPlayer > DistanceToApproximate)
             {
-                var t = MathHelper.Min((float)Math.Abs(currentDistance), LinearVelocity);
+                var t = MathHelper.Min((float)Math.Abs(currentDistanceToPlayer), LinearVelocity);
                 var velocity = Direction * t;
                 Velocity = velocity;
             }
 
-            MakeDelayBeforeNextDamage(currentDistance, gameTime);
+            MakeDelayBeforeNextDamage(currentDistanceToPlayer, gameTime);
         }
 
         private void ShootMonster(List<Sprite> sprites)
         {
-            GenerateShot(sprites, Shooting);
+            if(currentDistanceToPlayer < 1000)
+                GenerateShot(sprites, Shooting);
         }
 
         public List<Vector2> MakeDefaultDirectionToShot()
@@ -81,7 +101,7 @@ namespace GameProj
         private FireBall MakeFireballWithoutDirection()
         {
             var fireball = FireBall.Clone() as FireBall;
-            fireball.Position = Position + new Vector2(this.texture.Width / 4 + this.texture.Height / 4);
+            fireball.Position = Position + new Vector2(this.Texture.Width / 4 + this.Texture.Height / 4);
             fireball.LinearVelocity = Speed * 0.6f;
             fireball.LifeSpan = 7f;
             fireball.Parent = this;
@@ -115,9 +135,61 @@ namespace GameProj
             {
                 IsRemoved = true;
                 if (random.Next(0, 100) >= 80)
-                    sprites.Add(new HealthPotion(GameAction.healthPotionSprite, Position));
+                    sprites.Add(new HealthPotion(HealthPotion.healthPotionTexture, Position));
             }
             base.Update(gameTime, sprites);
+        }
+
+        public static Monster CreateSkeleton()
+        {
+            return new Monster(skeletonTexture)
+            {
+                Position = SetRandomMonsterPosition(random),
+                Speed = 2.3f,
+                FollowTarget = GameAction.player,
+                DistanceToApproximate = 0,
+                CurrentHealth = 5,
+            };
+        }
+
+        public static Monster CreateSlug()
+        {
+            var slug = new Monster(slugTexture)
+            {
+                FireBall = new FireBall(monsterFireballTexture),
+                Position = SetRandomMonsterPosition(random),
+                Speed = 2.2f,
+                FollowTarget = GameAction.player,
+                DistanceToApproximate = 0,
+                CurrentHealth = 4,
+            };
+            slug.Shooting = slug.MakeDefaultDirectionToShot;
+            return slug;
+        }
+
+        public static Monster CreateWizard()
+        {
+            var wizard = new Monster(wizardTexture)
+            {
+                FireBall = new FireBall(monsterFireballTexture),
+                Position = SetRandomMonsterPosition(random),
+                Speed = 1.7f,
+                FollowTarget = GameAction.player,
+                DistanceToApproximate = 300,
+                CurrentHealth = 3,
+            };
+            wizard.Shooting = wizard.MakeTripleShot;
+            return wizard;
+        }
+
+        private static Vector2 SetRandomMonsterPosition(Random random)
+        {
+            while (true)
+            {
+                var position = new Vector2(random.Next(0, GameAction.Width), random.Next(0, GameAction.Height));
+                if (Vector2.Distance(position, GameAction.player.Position) > 200)
+                    return position;
+            }
         }
     }
 }

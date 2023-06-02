@@ -22,6 +22,7 @@
     <File>D:/Game_1/GameProj/Content/Monster.png</File>
     <File>D:/Game_1/GameProj/Content/monsterFireball.png</File>
     <File>D:/Game_1/GameProj/Content/skelet.png</File>
+    <File>D:/Game_1/GameProj/Content/testPic.png</File>
     <File>D:/Game_1/GameProj/Content/walkDown.png</File>
     <File>D:/Game_1/GameProj/Content/walkLeft.png</File>
     <File>D:/Game_1/GameProj/Content/walkRight.png</File>
@@ -37,6 +38,7 @@
     <File>walkUp.png</File>
     <File xsi:nil="true" />
     <File>Font.spritefont</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

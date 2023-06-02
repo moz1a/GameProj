@@ -13,13 +13,12 @@ namespace GameProj
         protected KeyboardState currentKey;
         protected KeyboardState previousKey;
 
-
         public Vector2 Velocity;
         public float LinearVelocity = 1f;
         public float Speed = 0.1f;
         public Input Input;
-        protected Texture2D texture;
-        private AnimationManager animationManager;
+        public Texture2D Texture;
+        public AnimationManager animationManager;
         private Dictionary<string, Animation> animations;
         private Vector2 position;
         private Vector2 origin;
@@ -40,8 +39,8 @@ namespace GameProj
             get { return position; }
             set 
             {
-                if(texture != null)
-                    position = value + new Vector2(texture.Width/2, texture.Height/2);
+                if(Texture != null)
+                    position = value + new Vector2(Texture.Width/2, Texture.Height/2);
                 position = value;
                 if (animationManager != null) 
                     animationManager.Position = position;
@@ -61,8 +60,8 @@ namespace GameProj
         {
             get
             {
-                if(texture != null)
-                    return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+                if(Texture != null)
+                    return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
                 return new Rectangle((int)Position.X, (int)Position.Y, animationManager.Animation.FrameWidth,
                     animationManager.Animation.FrameHeight);
             }
@@ -71,21 +70,23 @@ namespace GameProj
 
         public Sprite(Texture2D texture)
         {
-            this.texture = texture;
+            this.Texture = texture;
             Origin = new Vector2(texture.Width / 2, texture.Height / 2);
+
+            
         }
 
         public Sprite(Dictionary<string, Animation> animations)
         {
             this.animations = animations;
             animationManager = new AnimationManager(this.animations.First().Value);
-            this.Rectangle = new Rectangle((int)Position.X, (int)Position.Y, animationManager.Animation.Texture.Width,
+            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, animationManager.Animation.Texture.Width,
                 animationManager.Animation.Texture.Height);
         }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            CheckCollision(sprites);
+            DontRunOnOther(sprites);
             if (animationManager != null)
             {
                 PlayAnimations();
@@ -110,14 +111,14 @@ namespace GameProj
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (texture != null)
-                spriteBatch.Draw(texture, Position, Color.White);
+            if (Texture != null)
+                spriteBatch.Draw(Texture, Position, Color.White);
             else if (animationManager != null)
                 animationManager.Draw(spriteBatch);
         }
 
         #region Collision
-        public virtual void CheckCollision(List<Sprite> sprites)
+        public virtual void DontRunOnOther(List<Sprite> sprites)
         {
             foreach (var sprite in sprites)
             {
@@ -167,11 +168,41 @@ namespace GameProj
                    this.Rectangle.Left < sprite.Rectangle.Right;
         }
 
-        protected bool IsTouching(Sprite sprite)
+        protected bool CheckRectangleCollision(Sprite sprite)
         {
             return IsTouchingBottom(sprite) || IsTouchingTop(sprite) ||
                    IsTouchingLeft(sprite) || IsTouchingRight(sprite);
         }
+
+        static public bool CheckPerPixelCollision(Rectangle rectangleA, Texture2D textureA,
+                            Rectangle rectangleB, Texture2D textureB)
+        {
+            Color[] dataA = new Color[textureA.Width * textureA.Height];
+            Color[] dataB = new Color[textureB.Width * textureB.Height];
+            textureA.GetData(dataA);
+            textureB.GetData(dataB);
+            int top = Math.Max(rectangleA.Top, rectangleB.Top);
+            int bottom = Math.Min(rectangleA.Bottom, rectangleB.Bottom);
+            int left = Math.Max(rectangleA.Left, rectangleB.Left);
+            int right = Math.Min(rectangleA.Right, rectangleB.Right);
+            for (int y = top; y < bottom; y++)
+            {
+                for (int x = left; x < right; x++)
+                {
+                    Color colorA = dataA[(x - rectangleA.Left) +
+                                         (y - rectangleA.Top) * rectangleA.Width];
+                    Color colorB = dataB[(x - rectangleB.Left) +
+                                         (y - rectangleB.Top) * rectangleB.Width];
+
+                    if (colorA.A != 0 && colorB.A != 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         #endregion
     }
 }

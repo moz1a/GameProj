@@ -31,6 +31,10 @@ namespace GameProj
             StandartAttributes = new Attributes();
             AttributesModifiers = new List<Attributes>(); 
         }
+        public Hero(Texture2D texture)
+            : base(texture)
+        {
+        }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {

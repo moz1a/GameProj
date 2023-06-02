@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace GameProj
 {
     public class FireBall : Sprite
     {
+        public static Texture2D fireballTexture { get; set; }
         private float timer;
         public FireBall(Texture2D texture)
             : base(texture)
@@ -19,7 +21,7 @@ namespace GameProj
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            CheckCollision(sprites);
+            DontRunOnOther(sprites);
 
             if (timer > LifeSpan)
                 IsRemoved = true;
@@ -30,18 +32,24 @@ namespace GameProj
         {
             base.Draw(spriteBatch);
         }
-        public override void CheckCollision(List<Sprite> sprites)
+
+        public override void DontRunOnOther(List<Sprite> sprites)
         {
             foreach (var sprite in sprites)
             {
-                if(IsTouching(sprite) &&
-                    (sprite is Monster || sprite is Hero) && this.Parent.GetType() != sprite.GetType())
+                if (CheckRectangleCollision(sprite))
                 {
-                    IsRemoved = true;
-                    if(sprite is Monster)
-                        (sprite as Monster).CurrentHealth--;
-                    else
-                        (sprite as Hero).CurrentHealth--;
+                    var spriteTexture = sprite is Hero ? (sprite as Hero).animationManager.Animation.Texture : sprite.Texture;
+
+                    if ((sprite is Monster || sprite is Hero) && this.Parent.GetType() != sprite.GetType() &&
+                        CheckPerPixelCollision(this.Rectangle, this.Texture, sprite.Rectangle, spriteTexture))
+                    {
+                        IsRemoved = true;
+                        if (sprite is Monster)
+                            (sprite as Monster).CurrentHealth--;
+                        else
+                            (sprite as Hero).CurrentHealth--;
+                    }
                 }
             }
         }

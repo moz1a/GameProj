@@ -51,3 +51,4 @@ D:\Game_1\GameProj\bin\Debug\net6.0\Content\monsterFireball.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\healthPotion.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\wizard.xnb
 D:\Game_1\GameProj\bin\Debug\net6.0\Content\skelet.xnb
+D:\Game_1\GameProj\bin\Debug\net6.0\Content\testPic.xnb
