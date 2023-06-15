@@ -13,8 +13,8 @@ namespace GameProj
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        public static int ScreenHeight { get; set; }
-        public static int ScreenWidth { get; set; }
+        public static int ScreenHeight;
+        public static int ScreenWidth;
         public static State State = State.Menu;
         private static TimeSpan lastTimeChangingState;
 
@@ -93,6 +93,11 @@ namespace GameProj
                     break;
                 case State.ResultAfterGame:
                     ResultAfterGame.Update();
+                    if(key.IsKeyDown(Keys.Enter)) 
+                    {
+                        LoadContent();
+                        State = ChangeState(State, gameTime);
+                    }
                     break;
             }
             base.Update(gameTime);
@@ -112,6 +117,9 @@ namespace GameProj
                     return state;
                 case State.Action:
                     state = State.Menu;
+                    return state;
+                case State.ResultAfterGame:
+                    state = State.Action;
                     return state;
             }
             return state;

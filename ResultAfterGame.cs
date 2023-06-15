@@ -17,8 +17,9 @@ namespace GameProj
         {
             spriteBatch.Draw(Background, texturePosition, Color.White);
             spriteBatch.DrawString(Font, $"Monsters killed: {MonstersKilled}", textPosition, color);
-
+            spriteBatch.DrawString(Font, $"Press Enter to die again...", textPosition + new Vector2(0, 100), color);
         }
+
         public static void Update()
         {
             color = Color.FromNonPremultiplied(187, 0, 30, timeCounter % 400);

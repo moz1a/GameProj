@@ -57,7 +57,7 @@ namespace GameProj
 
         private bool IsReloaded(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime - lastTimeShooted > TimeSpan.FromMilliseconds(400))
+            if (gameTime.TotalGameTime - lastTimeShooted > TimeSpan.FromMilliseconds(330))
             {
                 lastTimeShooted = gameTime.TotalGameTime;
                 return true;
@@ -93,6 +93,14 @@ namespace GameProj
 
         private Vector2 GetDirectionForShoot()
         {
+            if (Keyboard.GetState().IsKeyDown(Input.ShootDown) && (Keyboard.GetState().IsKeyDown(Input.ShootRight)))
+                return new Vector2(1, 1);
+            if (Keyboard.GetState().IsKeyDown(Input.ShootDown) && (Keyboard.GetState().IsKeyDown(Input.ShootLeft)))
+                return new Vector2(-1, 1);
+            if (Keyboard.GetState().IsKeyDown(Input.ShootUp) && (Keyboard.GetState().IsKeyDown(Input.ShootLeft)))
+                return new Vector2(-1, -1);
+            if (Keyboard.GetState().IsKeyDown(Input.ShootUp) && (Keyboard.GetState().IsKeyDown(Input.ShootRight)))
+                return new Vector2(1, -1);
             if (Keyboard.GetState().IsKeyDown(Input.ShootLeft))
                 return new Vector2(-1, 0);
             if (Keyboard.GetState().IsKeyDown(Input.ShootRight))
@@ -101,7 +109,6 @@ namespace GameProj
                 return new Vector2(0, -1);
             if (Keyboard.GetState().IsKeyDown(Input.ShootDown))
                 return new Vector2(0, 1);
-
             else throw new Exception("Invalid direction for shoot");
         }
             
