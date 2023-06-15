@@ -50,7 +50,7 @@ namespace GameProj
 
                 StandartAttributes = new Attributes()
                 {
-                    Speed = 5.5f
+                    Speed = 2.5f
                 },
 
                 AttributesModifiers = new List<Attributes>()

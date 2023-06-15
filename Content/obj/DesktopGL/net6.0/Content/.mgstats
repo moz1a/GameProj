@@ -1,11 +1,11 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/Menu.jpg","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/Menu.xnb","TextureProcessor","Texture2DContent",1084919,8294485,0,3385761
-"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkDown.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkDown.xnb","TextureProcessor","Texture2DContent",15104,27685,0,0017586
-"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkLeft.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkLeft.xnb","TextureProcessor","Texture2DContent",16957,29085,0,0027702
-"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkRight.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkRight.xnb","TextureProcessor","Texture2DContent",19127,29285,0,0024231
-"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkUp.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkUp.xnb","TextureProcessor","Texture2DContent",11888,26685,0,0022943
-"D:/Game_1/GameProj/Content/Menu.jpg","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/Menu.xnb","TextureProcessor","Texture2DContent",759767,7693637,0,2099053
-"D:/Game_1/GameProj/Content/walkDown.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkDown.xnb","TextureProcessor","Texture2DContent",15104,27685,0,0019206
-"D:/Game_1/GameProj/Content/walkLeft.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkLeft.xnb","TextureProcessor","Texture2DContent",16957,29085,0,0019718
-"D:/Game_1/GameProj/Content/walkRight.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkRight.xnb","TextureProcessor","Texture2DContent",19127,29285,0,0027263
-"D:/Game_1/GameProj/Content/walkUp.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkUp.xnb","TextureProcessor","Texture2DContent",11888,26685,0,0032986
+"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/Menu.jpg","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/Menu.xnb","TextureProcessor","Texture2DContent",1084919,8294485,0,3511157
+"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkDown.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkDown.xnb","TextureProcessor","Texture2DContent",15104,27685,0,0018841
+"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkLeft.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkLeft.xnb","TextureProcessor","Texture2DContent",16957,29085,0,0024097
+"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkRight.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkRight.xnb","TextureProcessor","Texture2DContent",19127,29285,0,0027295
+"C:/Users/maxsg/OneDrive/Рабочий стол/Картинки для игры/walkUp.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkUp.xnb","TextureProcessor","Texture2DContent",11888,26685,0,0032871
+"D:/Game_1/GameProj/Content/Menu.jpg","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/Menu.xnb","TextureProcessor","Texture2DContent",759767,7693637,0,1960186
+"D:/Game_1/GameProj/Content/walkDown.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkDown.xnb","TextureProcessor","Texture2DContent",15104,27685,0,0016574
+"D:/Game_1/GameProj/Content/walkLeft.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkLeft.xnb","TextureProcessor","Texture2DContent",16957,29085,0,0022421
+"D:/Game_1/GameProj/Content/walkRight.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkRight.xnb","TextureProcessor","Texture2DContent",19127,29285,0,0025741
+"D:/Game_1/GameProj/Content/walkUp.png","D:/Game_1/GameProj/Content/bin/DesktopGL/Content/walkUp.xnb","TextureProcessor","Texture2DContent",11888,26685,0,0021121
