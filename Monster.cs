@@ -28,9 +28,9 @@ namespace GameProj
         public static void GenerateRandomMonster(GameTime gameTime, List<Sprite> sprites, ref int monstersCount)
         {
             var chanceToSpawn = random.Next(0, 100);
-            if (chanceToSpawn <= 33)
+            if (chanceToSpawn <= 25)
                 sprites.Add(CreateWizard());
-            else if (chanceToSpawn > 33 && chanceToSpawn <= 66)
+            else if (chanceToSpawn > 25 && chanceToSpawn <= 62)
                 sprites.Add(CreateSlug());
             else
                 sprites.Add(CreateSkeleton());
